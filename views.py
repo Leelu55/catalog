@@ -24,13 +24,24 @@ DBSession = sessionmaker(bind=engine)
 session = DBSession()
 app = Flask(__name__)
 
-@app.route("/")
-@app.route("/library")
+@app.route('/')
+@app.route('/library')
 def showCategoresAndRecentBooks():
     categories = session.query(Category).all()
     recentBooks = session.query(Book).limit(2).all()
     return render_template('library.html',categories = categories, recent_books = recentBooks)
 
+@app.route('/library/<int:category_id>/books')
+def showBooksForCategory(category_id):
+    category = session.query(Category).filter_by(id = category_id).one()
+    booksForCategory = session.query(Book).filter_by(category_id = category_id).all()
+    return render_template('books.html', category = category, books_for_category = booksForCategory)
+
+@app.route('/library/<int:category_id>/<int:book_id>')
+def book(category_id, book_id):
+    book = session.query(Book).filter_by(book_id = book_id).one()
+    category =  session.query(Category).filter_by(id = category_id).one()
+    return render_template('book.html', book = book, category = category)
 
 @app.route('/library.json')
 def libraryJSON():
@@ -49,7 +60,7 @@ def booksOfUserJSON(id):
     return jsonify(Book=[b.serialize for b in books])
 
 @app.route('/library/<int:category_id>/<int:book_id>/book.json')
-def book(category_id, book_id):
+def bookJSON(category_id, book_id):
     book = session.query(Book).filter_by(category_id = category_id, book_id = book_id).one()
     return jsonify(Book=book.serialize)
 
