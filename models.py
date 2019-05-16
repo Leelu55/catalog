@@ -1,7 +1,8 @@
-from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy import Column, ForeignKey, Integer, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy import create_engine
+from sqlalchemy.sql import func
 
 Base = declarative_base()
 
@@ -21,12 +22,21 @@ class Category(Base):
   id = Column(Integer, primary_key = True)
   image = Column(String)
 
+  @property
+  def serialize(self):
+    """Return object data in easily serializeable format"""
+    return {
+       'name'         : self.name,
+       'id'         : self.id,
+       'image'         : self.image,
+    }
+
 
 class Book(Base):
   __tablename__ = 'book'
 
   title = Column(String, nullable = False, index = True)
-  id = Column(Integer, primary_key = True)
+  book_id = Column(Integer, primary_key = True)
   author = Column(String)
   description = Column(String)
   location = Column(String(250), nullable = False)
@@ -36,6 +46,7 @@ class Book(Base):
   category = relationship(Category)
   user_id = Column(Integer, ForeignKey('user.id'))
   user = relationship(User)
+  created_date = Column(DateTime(timezone=True), server_default=func.now())
 
 
   @property
@@ -44,11 +55,12 @@ class Book(Base):
     return {
        'title'         : self.title,
        'author'         : self.author,
-       'id'         : self.id,
+       'book_id'         : self.book_id,
        'image'         : self.image,
        'description'  : self.description,
        'number_of_reads'  : self.number_of_reads,
-       'location' : self.location
+       'location' : self.location,
+       'created_date' : self.created_date
     }
 
 

@@ -17,7 +17,7 @@ import requests
 
 
 
-engine = create_engine('sqlite:///library.db')
+engine = create_engine('sqlite:///library.db', connect_args={'check_same_thread': False})
 
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
@@ -27,8 +27,31 @@ app = Flask(__name__)
 @app.route("/")
 @app.route("/library")
 def showCategoresAndRecentBooks():
-    return "Hello World!"
+    categories = session.query(Category).all()
+    recentBooks = session.query(Book).limit(2).all()
+    return render_template('library.html',categories = categories, recent_books = recentBooks)
 
+
+@app.route('/library.json')
+def libraryJSON():
+    categories = session.query(Category).all()
+    return jsonify(Category=[c.serialize for c in categories])
+
+@app.route('/library/<int:category_id>/books.json')
+def booksInCategoryJSON(category_id):
+    books = session.query(Book).filter_by(category_id = category_id).all()
+    return jsonify(Book=[b.serialize for b in books])
+
+
+@app.route('/library/<int:id>/booksOfUser.json')
+def booksOfUserJSON(id):
+    books = session.query(Book).filter_by(user_id = id).all()
+    return jsonify(Book=[b.serialize for b in books])
+
+@app.route('/library/<int:category_id>/<int:book_id>/book.json')
+def book(category_id, book_id):
+    book = session.query(Book).filter_by(category_id = category_id, book_id = book_id).one()
+    return jsonify(Book=book.serialize)
 
 if __name__ == '__main__':
     app.debug = True
