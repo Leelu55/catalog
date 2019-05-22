@@ -174,6 +174,32 @@ def showBook(category_id, book_id):
     category =  session.query(Category).filter_by(id = category_id).one()
     return render_template('book.html', book = book, category = category)
 
+@app.route('/library/add_book', methods=['GET', 'POST'])
+def addBook():
+    if 'username' not in login_session:
+      return redirect(url_for('authorize'))
+    if request.method == 'POST':
+        category = session.query(Category).filter_by(name = request.form['category']).one()
+        categoryID = category.id
+
+
+        newBook = Book(
+          title=request.form['title'],
+          author=request.form['author'],
+          location = request.form['location'],
+          category_id = categoryID,
+          user_id=login_session['user_id']
+          )
+
+        session.add(newBook)
+        flash('New Book %s Successfully Created' % newBook.title)
+        session.commit()
+        return redirect(url_for('showLibrary'))
+    else:
+      return render_template('add_book.html')
+
+
+
 @app.route('/library.json')
 def libraryJSON():
     categories = session.query(Category).all()
