@@ -26,7 +26,7 @@ APPLICATION_NAME = "Library"
 
 
 # This variable specifies the name of a file that contains the OAuth 2.0
-# information for this application, including its client_id and client_secret.
+# information for this application, including its client_id and client_secret. It has to be stored in the app root dir
 CLIENT_SECRETS_FILE = "client_secrets.json"
 
 # This OAuth 2.0 access scope allows for all personal info, including any personal info you've made publicly available"
@@ -93,6 +93,7 @@ def revoke():
 def clear_credentials():
   if 'credentials' in login_session:
     del login_session['credentials']
+    login_session.clear()
   return redirect(url_for('showLibrary'))
 
 @app.route('/')
@@ -120,6 +121,7 @@ def showLibrary():
       login_session['username'] = data['name']
       login_session['picture'] = data['picture']
       login_session['email'] = data['email']
+
        # see if user exists, if it doesn't make a new one
       user_id = getUserID(data["email"])
       if not user_id:
@@ -167,7 +169,7 @@ def showBooksForCategory(category_id):
       return render_template('private_books.html', category = category, books_for_user = booksOfUser, user = user)
 
 @app.route('/library/<int:category_id>/<int:book_id>')
-def book(category_id, book_id):
+def showBook(category_id, book_id):
     book = session.query(Book).filter_by(book_id = book_id).one()
     category =  session.query(Category).filter_by(id = category_id).one()
     return render_template('book.html', book = book, category = category)

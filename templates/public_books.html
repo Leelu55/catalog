@@ -8,12 +8,12 @@
             <div class = 'header'>
                 <h1> {{category.name}}</h1>
             </div>
-
             <ul>
             {% for book in books_for_category %}
-
                 <div class="container">
-                    <h3>{{book.title}}</h3>
+                    <a href="{{url_for('showBook', category_id = book.category_id, book_id = book.book_id)}}">
+                        <h3>{{book.title}}</h3>
+                    </a>
                 </div>
             {% endfor %}
             </ul>
