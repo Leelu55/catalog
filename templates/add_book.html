@@ -1,56 +1,74 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+     <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="/static/materialize/css/materialize.min.css"  media="screen,projection"/>
 
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   </head>
   <body>
-     <div class="form-group">
-            <form action="#" method = "post">
-              <ul>
-              <li>
-                <label for="name">Name:</label>
-                <input type ="text" maxlength="50" class="form-control" name="title"placeholder="Title">
-              </li>
+     <!--JavaScript at end of body for optimized loading-->
+      <script type="text/javascript" src="/static/materialize/js/materialize.min.js"></script>
 
-              <li>
-              <label for="description">Description:</label>
-              <textarea class="form-control" maxlength="250" rows="3" name="description" placeholder="Description"></textarea>
-              </li>
-              <li>
-              <label for="author">Author or Editor:</label>
-              <textarea class="form-control" maxlength="250" rows="3" name="author" placeholder="Author or Editor"></textarea>
-
-              </li>
-
-              <li>
-              <label for="category">Category:</label>
-              <div class="radio">
-                <label>
-                  <input type="radio" name="category" id="1" value="Crime Fiction">Crime Fiction
-                </label>
-              </div>
-              <div>
-                <label>
-                  <input type="radio" name="category" id="2" value="Poetry">Poetry
-                </label>
-
-              </div>
-              <div class="radio">
-                <label>
-                  <input type="radio" name="category" id="3" value="Autobiography">Autobiography
-                </label>
-              </div>
-            </li>
-
-             <li>
-                <label for="location">Location:</label>
-                <input type ="text" maxlength="50" class="form-control" name="location" placeholder="Location">
-              </li>
-
-              <button type="submit" class="btn btn-default" id="submit" type="submit">
-              <span class="glyphicon glyphicon-glass" aria-hidden="true"></span>Create</button>
+      <nav class="light-green lighten-1" role="navigation">
+        <div class="nav-wrapper">
+            <a href="{{url_for('showLibrary')}}" class="brand-logo">{{user_name}}'s Library</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="{{url_for('revoke')}}">Logout</a></li>
             </ul>
-            </form>
+        </div>
+      </nav>
+
+     <div class="form-group">
+      <form action="#" method = "post">
+          <ul>
+          <li>
+            <label for="name">Name:</label>
+            <input type ="text" maxlength="50" class="form-control" name="title"placeholder="Title">
+          </li>
+
+          <li>
+          <label for="description">Description:</label>
+          <textarea class="form-control" maxlength="250" rows="3" name="description" placeholder="Description"></textarea>
+          </li>
+          <li>
+          <label for="author">Author or Editor:</label>
+          <textarea class="form-control" maxlength="250" rows="3" name="author" placeholder="Author or Editor"></textarea>
+
+          </li>
+
+          <li>
+          <label for="category">Category:</label>
+          <div class="radio">
+            <label>
+              <input type="radio" name="category" id="1" value="Crime Fiction">Crime Fiction
+            </label>
+          </div>
+          <div>
+            <label>
+              <input type="radio" name="category" id="2" value="Poetry">Poetry
+            </label>
+
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="category" id="3" value="Autobiography">Autobiography
+            </label>
+          </div>
+        </li>
+
+         <li>
+            <label for="location">Location:</label>
+            <input type ="text" maxlength="50" class="form-control" name="location" placeholder="Location">
+          </li>
+
+          <button type="submit" class="btn btn-default" id="submit" type="submit">
+          <span class="glyphicon glyphicon-glass" aria-hidden="true"></span>Create</button>
+        </ul>
+      </form>
     </div>
   </body>
 </html>

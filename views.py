@@ -24,7 +24,6 @@ app = Flask(__name__)
 
 APPLICATION_NAME = "Library"
 
-
 # This variable specifies the name of a file that contains the OAuth 2.0
 # information for this application, including its client_id and client_secret. It has to be stored in the app root dir
 CLIENT_SECRETS_FILE = "client_secrets.json"
@@ -166,6 +165,7 @@ def showBooksForCategory(category_id):
     else:
       user= session.query(User).filter_by(email=login_session['email']).one()
       booksOfUser = session.query(Book).filter_by(user_id = user.id, category_id = category_id).all()
+      print(booksOfUser)
       return render_template('private_books.html', category = category, books_for_user = booksOfUser, user = user)
 
 @app.route('/library/<int:category_id>/<int:book_id>')
@@ -178,10 +178,10 @@ def showBook(category_id, book_id):
 def addBook():
     if 'username' not in login_session:
       return redirect(url_for('authorize'))
+
     if request.method == 'POST':
         category = session.query(Category).filter_by(name = request.form['category']).one()
         categoryID = category.id
-
 
         newBook = Book(
           title=request.form['title'],
@@ -196,8 +196,13 @@ def addBook():
         session.commit()
         return redirect(url_for('showLibrary'))
     else:
-      return render_template('add_book.html')
+      return render_template('add_book.html', user_name = login_session['username'])
 
+@app.route('/library/<int:book_id>/edit', methods=['GET', 'POST'])
+def editBook(book_id):
+  if 'username' not in login_session:
+      return redirect(url_for('authorize'))
+  return render_template('edit_book.html')
 
 
 @app.route('/library.json')
