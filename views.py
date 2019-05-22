@@ -4,7 +4,7 @@ from flask import Flask, jsonify, request, url_for, abort, g, render_template, r
 #SQLALCHEMY ORM
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, sessionmaker
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, desc
 
 import json, random, string, os
 
@@ -68,40 +68,67 @@ def oauth2callback():
   #              credentials in a persistent database instead.
   credentials = flow.credentials
   login_session['credentials'] = credentials_to_dict(credentials)
-  return redirect(url_for('showCategoresAndRecentBooks'))
+  return redirect(url_for('showLibrary'))
+
+@app.route('/revoke')
+def revoke():
+  if 'credentials' not in login_session:
+    return ('You need to <a href="/authorize">authorize</a> before ' +
+            'testing the code to revoke credentials.')
+
+  credentials = google.oauth2.credentials.Credentials(
+    **login_session['credentials'])
+
+  revoke = requests.post('https://accounts.google.com/o/oauth2/revoke',
+      params={'token': credentials.token},
+      headers = {'content-type': 'application/x-www-form-urlencoded'})
+
+  status_code = getattr(revoke, 'status_code')
+  if status_code == 200:
+    return redirect(url_for('clear_credentials'))
+  else:
+    return('An error occurred.')
+
+@app.route('/clear')
+def clear_credentials():
+  if 'credentials' in login_session:
+    del login_session['credentials']
+  return redirect(url_for('showLibrary'))
 
 @app.route('/')
 @app.route('/library')
-def showCategoresAndRecentBooks():
-
-    if 'credentials' not in login_session:
-        return redirect('authorize')
-
-    # Load credentials from the session.
-    credentials = google.oauth2.credentials.Credentials(
-      **login_session['credentials'])
-
-     # Get user info
-    userinfo_url = "https://www.googleapis.com/oauth2/v1/userinfo"
-    params = {'access_token': credentials.token, 'alt': 'json'}
-    answer = requests.get(userinfo_url, params=params)
-
-    data = answer.json()
-
-    login_session['username'] = data['name']
-    login_session['picture'] = data['picture']
-    login_session['email'] = data['email']
-     # see if user exists, if it doesn't make a new one
-    user_id = getUserID(data["email"])
-    if not user_id:
-        user_id = createUser(login_session)
-    login_session['user_id'] = user_id
+def showLibrary():
 
     categories = session.query(Category).all()
-    recentBooks = session.query(Book).limit(2).all()
-    return render_template('library.html',categories = categories, recent_books = recentBooks)
+    recentBooks = session.query(Book).order_by(desc(Book.created_date)).limit(10).all()
 
+    if 'credentials' not in login_session:
+        return render_template('public_library.html',categories = categories, recent_books = recentBooks)
 
+    else:
+      # Load credentials from the session.
+      credentials = google.oauth2.credentials.Credentials(
+        **login_session['credentials'])
+
+       # Get user info
+      userinfo_url = "https://www.googleapis.com/oauth2/v1/userinfo"
+      params = {'access_token': credentials.token, 'alt': 'json'}
+      answer = requests.get(userinfo_url, params=params)
+
+      data = answer.json()
+
+      login_session['username'] = data['name']
+      login_session['picture'] = data['picture']
+      login_session['email'] = data['email']
+       # see if user exists, if it doesn't make a new one
+      user_id = getUserID(data["email"])
+      if not user_id:
+          user_id = createUser(login_session)
+      login_session['user_id'] = user_id
+
+      user = session.query(User).filter_by(email=data['email']).one()
+
+      return render_template('private_library.html',categories = categories, recent_books = recentBooks, user = user)
 
 # User Helper Functions
 
@@ -131,7 +158,13 @@ def getUserID(email):
 def showBooksForCategory(category_id):
     category = session.query(Category).filter_by(id = category_id).one()
     booksForCategory = session.query(Book).filter_by(category_id = category_id).all()
-    return render_template('books.html', category = category, books_for_category = booksForCategory)
+
+    if 'username' not in login_session:
+        return render_template('public_books.html', category = category, books_for_category = booksForCategory)
+    else:
+      user= session.query(User).filter_by(email=login_session['email']).one()
+      booksOfUser = session.query(Book).filter_by(user_id = user.id, category_id = category_id).all()
+      return render_template('private_books.html', category = category, books_for_user = booksOfUser, user = user)
 
 @app.route('/library/<int:category_id>/<int:book_id>')
 def book(category_id, book_id):

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Library</title>
+</head>
+<body>
+ <div class = 'pane'>
+            <div class = 'header'>
+                <h1>{{user.name}}'s Library</h1>
+            </div>
+
+            <div class = 'logout'>
+                <a href="{{url_for('revoke')}}">Click Here to Log out </a>
+            </div>
+            <h2>Categories</h2>
+            <ul>
+            {% for category in categories %}
+
+                     <div class="container">
+                            <h3>{{category.name}}</h3>
+                    </div>
+                </li>
+            {% endfor %}
+            </ul>
+
+            <h2>Recently Added</h2>
+            <ul>
+            {% for recent_book in recent_books %}
+                {% if recent_book.user_id == user.id %}
+                     <div class="container">
+                            <h3>{{recent_book.title}}</h3>
+                    </div>
+                {% endif %}
+
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+</body>
+</html>
