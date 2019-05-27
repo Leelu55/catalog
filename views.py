@@ -218,9 +218,10 @@ def editBook(book_id):
     if request.form['category']:
       book.category_id = request.form['category']
 
-      session.add(book)
-      session.commit()
-      return redirect(url_for('showBook', book_id = book.book_id, category_id = book.category_id))
+    session.add(book)
+    session.commit()
+    return redirect(url_for('showBook', book_id = book.book_id, category_id = book.category_id))
+
   else:
       return render_template('edit_book.html', book = book, user_name = login_session['username'])
 
