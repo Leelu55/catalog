@@ -215,9 +215,10 @@ def editBook(book_id):
       book.description = request.form['description']
     if request.form['author']:
       book.author = request.form['author']
+    if request.form['category']:
+      book.category_id = request.form['category']
 
       session.add(book)
-      flash('Book %s Successfully Updated' % book.title)
       session.commit()
       return redirect(url_for('showBook', book_id = book.book_id, category_id = book.category_id))
   else:

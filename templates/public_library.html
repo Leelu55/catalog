@@ -28,28 +28,49 @@
             </div>
         </nav>
 
-        <ul class="collection with-header">
-            <li class="collection-header"><h4>Categories</h4></li>
-            {% for category in categories %}
-                <li class="collection-item avatar">
-                  <img src="/static/images/default_book.jpg" alt="" class="circle">
-                  <span class="title">
-                    <a href="{{url_for('showBooksForCategory', category_id = category.id)}}">{{category.name}}</a></span>
-                </li>
-            {% endfor %}
-          </ul>
+        <div class="container">
+          <div class="row">
+            <h4>Categories</h4>
+              {% for category in categories %}
+              <div class="col m4">
+                <div class=card>
+                    <div class="card-image">
+                      <img src="/static/images/default_book.jpg">
+                      <span class="card-title">{{category.name}}</span>
+                    </div>
+                    <div class="card-content">
+                      <p>All {{category.name}} Books</p>
+                    </div>
+                    <div class="card-action">
+                      <a href="{{url_for('showBooksForCategory', category_id = category.id)}}">{{category.name}} Books</a>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+          </div>
+        </div>
 
-        <ul class="collection with-header">
-            <li class="collection-header"><h4>Recently Added</h4></li>
+        <div class="container">
+          <div class="row">
+            <h4>Recently Added Books</h4>
             {% for recent_book in recent_books %}
-                <li class="collection-item avatar">
-                  <img src="/static/images/default_book.jpg" alt="" class="circle">
-                  <span class="title">
-                   <a href="{{url_for('showBook', category_id = recent_book.category_id, book_id = recent_book.book_id)}}">
-                        {{recent_book.title}}
-                    </a>
-                </li>
+              <div class="col m4">
+                <div class=card>
+                    <div class="card-image">
+                      <img src="/static/images/default_book.jpg">
+                      <span class="card-title">{{recent_book.title}}</span>
+                    </div>
+                     <div class="card-content">
+                      <p>Details about {{recent_book.title}}</p>
+                    </div>
+                    <div class="card-action">
+                      <a href="{{url_for('showBook', category_id = recent_book.category_id, book_id = recent_book.book_id)}}">
+                        {{recent_book.title}}</a>
+                    </div>
+                  </div>
+                </div>
             {% endfor %}
-          </ul>
+          </div>
+        </div>
     </body>
 </html>

@@ -27,15 +27,33 @@
             </div>
         </nav>
 
-        <ul class="collection with-header">
-            <li class="collection-header"><h4>{{category.name}}</h4></li>
+        <div class="container">
+          <div class="row">
+            <h4>{{category.name}}</h4>
             {% for book in books_for_category %}
-                <li class="collection-item">
-                    <div>
-                        <a href="{{url_for('showBook', category_id = book.category_id, book_id = book.book_id)}}">{{book.title}}</a>
+               <div class="col m4">
+                <div class=card>
+                    <div class="card-image">
+                      <img src="/static/images/default_book.jpg">
+                      <span class="card-title">{{book.title}}</span>
                     </div>
-                </li>
+                     <div class="card-content">
+                      <p>Details about {{book.title}}</p>
+                    </div>
+                    <div class="card-action">
+                      <a href="{{url_for('showBook', category_id = book.category_id, book_id = book.book_id)}}">
+                        {{book.title}}</a>
+                    </div>
+                  </div>
+                </div>
             {% endfor %}
-        </ul>
+          </div>
+        </div>
+
+        <div class="fixed-action-btn">
+            <a class="btn-floating btn-large red" href="{{url_for('addBook')}}">
+            <i class="large material-icons">mode_edit</i>
+            </a>
+         </div>
     </body>
 </html>
