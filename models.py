@@ -39,7 +39,6 @@ class Book(Base):
   book_id = Column(Integer, primary_key = True)
   author = Column(String)
   description = Column(String)
-  location = Column(String(250), nullable = False)
   image = Column(String)
   number_of_reads = Column(Integer, default = 0)
   category_id =  Column(Integer, ForeignKey('category.id'))
@@ -59,7 +58,6 @@ class Book(Base):
        'image'         : self.image,
        'description'  : self.description,
        'number_of_reads'  : self.number_of_reads,
-       'location' : self.location,
        'created_date' : self.created_date
     }
 

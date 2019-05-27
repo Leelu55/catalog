@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+         <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="/static/materialize/css/materialize.min.css"  media="screen,projection"/>
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Information about {{book.title}}</title>
+    </head>
+
+    <body>
+        <!--JavaScript at end of body for optimized loading-->
+        <script type="text/javascript" src="/static/materialize/js/materialize.min.js"></script>
+       <nav class="light-green lighten-1" role="navigation">
+            <div class="nav-wrapper"  >
+              <div class="row">
+                <div class="col s12 m6 l3">
+                  <a href="{{url_for('showLibrary')}}" class="brand-logo">{{user.name}}'s Library</a>
+                </div>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                  <li><a href="{{url_for('revoke')}}">Logout</a></li>
+                </ul>
+              </div>
+            </div>
+        </nav>
+
+
+            <div class=" section row">
+                <div class="col s2"><img class="responsive-img" src="/static/images/default_book.jpg" alt="book shelf"></div>
+            </div>
+
+            <div class="row">
+                <div class="col s10">
+                    <div class="col">
+                        <h5>{{book.title}}</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s10">
+                    <div class="col"><i class="material-icons prefix">account_circle</i></div>
+                    <div class="col s1">Author</div>
+                    <div class="col s7">{{book.author}}</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s10">
+                    <div class="col"><i class="material-icons prefix">account_circle</i></div>
+                    <div class="col s1">Category</div>
+                    <div class="col s7">{{category.name}}</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s10">
+                    <div class="col"><i class="material-icons prefix">account_circle</i></div>
+                    <div class="col s1">Description: </div>
+                    <div class="col s7">{{book.description}}</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s10">
+                    <div class="col"><i class="material-icons prefix">account_circle</i></div>
+                    <div class="col s1">Location:</div>
+                    <div class="col s7">{{book.location}}</div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col s1">
+                    <div class="col"><a class="waves-effect waves-light btn" href="{{url_for('editBook', book_id = book.book_id)}}">
+                        <i class="material-icons left">cloud</i>edit</a></div>
+                 </div>
+
+
+                 <div class ="col s1">
+                        <a class="waves-effect waves-light btn" href="{{url_for('deleteBook', book_id = book.book_id)}}"><i class="material-icons left">cloud</i>Delete</a>
+                </div>
+            </div>
+
+    </body>
+</html>

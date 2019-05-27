@@ -8,7 +8,7 @@
 
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>Information about {{book.title}}</title>
+        <title>Deleting {{book.title}}</title>
     </head>
 
     <body>
@@ -28,26 +28,19 @@
         </nav>
 
 
-        <div class=" section row">
-            <div class="col s2"><img class="responsive-img" src="/static/images/default_book.jpg" alt="book shelf"></div>
-        </div>
-
-        <div class="section row">
-            <div class="col">
-                <h5>{{book.title}}</h5>
+            <div class=" section row">
+                <div class="col s2"><img class="responsive-img" src="/static/images/default_book.jpg" alt="book shelf"></div>
             </div>
-        </div>
 
-        <div class="section row">
-            <div class="col">
-                <form action="#" method = 'post'>
-                    <button class="btn waves-effect waves-light" id="submit" type="submit">
-                        <i class="material-icons right">delete</i>Delete
-                    </button>
-
-                    <a class="waves-effect waves-light btn" href = "{{url_for('showBook', book_id = book.book_id, category_id = book.category_id)}}"><i class="material-icons left">cloud</i>Cancel</a>
-                </form>
+            <div class="container">
+              <div class = "row">
+                <div class="col s10">
+                    <div class="col">
+                        <h5>Do you really want to delete {{book.title}}</h5>
+                    </div>
+                </div>
+              </div>
             </div>
-        </div>
+
     </body>
 </html>

@@ -136,7 +136,7 @@ def showLibrary():
 
 def createUser(login_session):
     newUser = User(name=login_session['username'], email=login_session[
-                   'email'], picture=login_session['picture'])
+                   'email'], image=login_session['picture'])
     session.add(newUser)
     session.commit()
     user = session.query(User).filter_by(email=login_session['email']).one()
@@ -172,7 +172,12 @@ def showBooksForCategory(category_id):
 def showBook(category_id, book_id):
     book = session.query(Book).filter_by(book_id = book_id).one()
     category =  session.query(Category).filter_by(id = category_id).one()
-    return render_template('book.html', book = book, category = category)
+    if 'username' not in login_session:
+      return render_template('public_book.html', book = book, category = category)
+    else:
+      user= session.query(User).filter_by(email=login_session['email']).one()
+      return render_template('private_book.html', book = book, category = category, user = user)
+
 
 @app.route('/library/add_book', methods=['GET', 'POST'])
 def addBook():
@@ -180,13 +185,11 @@ def addBook():
       return redirect(url_for('authorize'))
 
     if request.method == 'POST':
-        category = session.query(Category).filter_by(name = request.form['category']).one()
+        category = session.query(Category).filter_by(id = request.form['category']).one()
         categoryID = category.id
-
         newBook = Book(
           title=request.form['title'],
-          author=request.form['author'],
-          location = request.form['location'],
+          author=request.form['author_editor'],
           category_id = categoryID,
           user_id=login_session['user_id']
           )
@@ -202,7 +205,38 @@ def addBook():
 def editBook(book_id):
   if 'username' not in login_session:
       return redirect(url_for('authorize'))
-  return render_template('edit_book.html')
+
+  book = session.query(Book).filter_by(book_id = book_id).one()
+
+  if request.method == 'POST':
+    if request.form['title']:
+      book.title = request.form['title']
+    if request.form['description']:
+      book.description = request.form['description']
+    if request.form['author']:
+      book.author = request.form['author']
+
+      session.add(book)
+      flash('Book %s Successfully Updated' % book.title)
+      session.commit()
+      return redirect(url_for('showBook', book_id = book.book_id, category_id = book.category_id))
+  else:
+      return render_template('edit_book.html', book = book, user_name = login_session['username'])
+
+@app.route('/library/<int:book_id>/delete', methods=['GET', 'POST'])
+def deleteBook(book_id):
+  if 'username' not in login_session:
+    return redirect(url_for('authorize'))
+  bookToDelete = session.query(Book).filter_by(book_id = book_id).one()
+
+  if request.method == 'POST':
+    bookToDelete = session.query(Book).filter_by(book_id=book_id).one()
+    session.delete(bookToDelete)
+    session.commit()
+    flash('Book Deleted')
+    return redirect(url_for('showLibrary'))
+
+  return render_template('delete_book.html', book = bookToDelete, user_name = login_session['username'])
 
 
 @app.route('/library.json')
