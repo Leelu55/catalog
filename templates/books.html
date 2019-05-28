@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+       {% include 'head.html' %}
+
+    </head>
+
+    <body style="background-color: #e0e5db;">
+
+      {% include 'nav.html' %}
+
+      <div class="container">
+        <div class="row">
+          <h4>{{category.name}}</h4>
+          {% for book in books %}
+             <div class="col m4">
+              <div class=card>
+                  <div class="card-image">
+                    <img src="/static/images/default_book.jpg">
+                    <span class="card-title">{{book.title}}</span>
+                  </div>
+                   <div class="card-content">
+                    <p>Details about {{book.title}}</p>
+                  </div>
+
+                      <div class="card-action">
+                          <div class="section row">
+                              <div class="col">
+                                  <a class="waves-effect teal btn" href = "{{url_for('showBook', book_id = book.book_id, category_id = book.category_id)}}"><i class="material-icons left">details</i>Details</a>
+                              </div>
+                              {% if user %}
+                                  <div class="col">
+                                      <a class="waves-effect blue btn" href = "{{url_for('showBook', book_id = book.book_id, category_id = book.category_id)}}"><i class="material-icons left">edit</i>Edit</a>
+                                  </div>
+                              {% endif %}
+                          </div>
+                      </div>
+
+                </div>
+              </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      {% if user %}
+        <div class="fixed-action-btn">
+            <a class="btn-floating btn-large red" href="{{url_for('addBook')}}">
+            <i class="large material-icons">add</i>
+            </a>
+        </div>
+      {% endif %}
+           <!--JavaScript at end of body for optimized loading-->
+      <script type="text/javascript" src="/static/materialize/js/materialize.min.js"></script>
+    </body>
+</html>

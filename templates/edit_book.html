@@ -1,28 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-     <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="/static/materialize/css/materialize.min.css"  media="screen,projection"/>
 
-    <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    {% include 'head.html' %}
+
   </head>
 
-  <body>
-    <nav class="light-green lighten-1" role="navigation">
-      <div class="nav-wrapper">
-        <div class="row">
-          <div class="col s12 m6 l3">
-            <a href="{{url_for('showLibrary')}}" class="brand-logo">{{user_name}}'s Library</a>
-          </div>
-          <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="{{url_for('revoke')}}">Logout</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+  <body style="background-color: #e0e5db;">
+
+    {% include 'nav.html' %}
 
     <div class="container section">
       <div class="row">
@@ -38,23 +24,23 @@
             <div class="card-content">
               <form action="#" method="post">
                 <div class="row">
-                  <div class="input-field col s6">
-                    <i class="material-icons prefix">account_circle</i>
+                  <div class="input-field col s10">
+                    <i class="material-icons prefix">title</i>
                     <input value="{{book.title}}" name="title" id="title" type="text" class="validate">
                     <label for="title">Title</label>
                   </div>
                 </div>
 
                 <div class="row">
-                  <div class="input-field col s6">
-                    <i class="material-icons prefix">account_circle</i>
-                    <input value= {{book.description}} id="description" name="description" type="text" class="validate">
+                  <div class="input-field col s10">
+                    <i class="material-icons prefix">description</i>
+                    <input value= "{{book.description}}" id="description" name="description" type="text" class="validate">
                     <label for="description">Description</label>
                   </div>
                 </div>
 
                 <div class="row">
-                  <div class="input-field col s6">
+                  <div class="input-field col s10">
                     <i class="material-icons prefix">account_circle</i>
                     <input value="{{book.author}}" name="author" id="author_editor" type="text" class="validate">
                     <label for="author">Author or Editor</label>
@@ -66,7 +52,7 @@
                     <div class="section">
                       <div class="row">
                         <div class="col">
-                          <i class="small material-icons left">account_circle</i>
+                          <i class="small material-icons left">apps</i>
                           <span class="category">Category</span>
                         </div>
                       </div>
@@ -76,61 +62,44 @@
                       <div class="col s12 offset-s1">
                         <p>
                           <label>
-                            {% if book.category_id == 1 %}
-                              <input class="with-gap" name="category" type="radio" id="1" value="1" checked />
-                            {% else %}
-                              <input class="with-gap" name="category" type="radio" id="1" value="1" />
-                            {% endif %}
-
+                            <input class="with-gap" name="category" type="radio" id="1" value="1" checked="{{ book.category_id == 1 }}" />
                             <span>Fiction</span>
                           </label>
                         </p>
 
                         <p>
                           <label>
-                            {% if book.category_id == 2%}
-                              <input class="with-gap" name="category" type="radio" id="2" value="2" checked />
-                            {% else %}
-                              <input class="with-gap" name="category" type="radio" id="2" value="2" />
-                            {% endif %}
+                            <input class="with-gap" name="category" type="radio" id="2" value="2" checked="{{ book.category_id == 2 }}"/>
                             <span>Poetry</span>
                           </label>
                         </p>
 
                         <p>
                           <label>
-                            {% if book.category_id == 3%}
-                              <input class="with-gap" name="category" type="radio" id="3" value="3" checked/>
-                            {% else %}
-                              <input class="with-gap" name="category" type="radio" id="3" value="3"/>
-                            {% endif %}
+                            <input class="with-gap" name="category" type="radio" id="3" value="3" checked="{{ book.category_id == 3 }}" />
                           <span>Non-Fiction</span>
                           </label>
                         </p>
 
                         <p>
                           <label>
-                            {% if book.category_id == 4 %}
-                              <input class="with-gap" name="category" type="radio" id="4" value="4" checked/>
-                            {% else %}
-                              <input class="with-gap" name="category" type="radio" id="4" value="4" />
-                            {% endif %}
+                            <input class="with-gap" name="category" type="radio" id="4" value="4" checked="{{ book.category_id == 4 }}" />
                             <span>Children's Books</span>
                           </label>
                         </p>
                       </div>
                     </div>
 
-                    <div class="row">
-                      <div class ="col s12 offset-s1">
-                        <button type="submit" class="btn btn-default" id="submit" type="submit">
-                          <span class="glyphicon glyphicon-glass" aria-hidden="true"></span>Update
-                        </button>
-
-                        <a class="waves-effect waves-light btn" href = "{{url_for('showBook', book_id = book.book_id, category_id = book.category_id)}}"><i class="material-icons left">cloud</i>Cancel</a>
-
-                      </div>
-                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class ="col">
+                     <button class="btn waves-effect blue" id="submit" type="submit">
+                          <i class="material-icons left ">update</i>Update
+                      </button>
+                  </div>
+                  <div class="col">
+                    <a class="waves-effect orange btn" href = "{{url_for('showBook', book_id = book.book_id, category_id = book.category_id)}}"><i class="material-icons left">cancel</i>Cancel</a>
                   </div>
                 </div>
               </form>
