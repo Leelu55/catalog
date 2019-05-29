@@ -1,47 +1,46 @@
 <!DOCTYPE html>
 <html>
-    <head>
+  <head>
 
-        {% include 'head.html' %}
+    {% include 'head.html' %}
 
-    </head>
+  </head>
 
-    <body style="background-color: #e0e5db;">
+  <body>
 
-        {% include 'nav.html' %}
-        <div class="container section">
-            <div class="row">
-                <div class="col s6 offset-s3">
-
-                    <div class= "row section ">
-                        <div class="col s12">
-                            <h5>Really delete Book?</h5>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-content">
-                            <form action="#" method="post">
-                                <div class="card-image">
-                                    <img src="/static/images/default_book.jpg">
-                                    <span class="card-title">{{book.title}}</span>
-                                </div>
-                                <div class="section row">
-                                    <div class="col">
-                                        <button class="btn waves-effect red " id="submit" type="submit">
-                                            <i class="material-icons right">delete</i>Delete
-                                        </button>
-                                    </div>
-                                    <div class="col">
-                                        <a class="waves-effect orange btn" href = "{{url_for('showBook', book_id = book.book_id, category_id = book.category_id)}}"><i class="material-icons left">cancel</i>Cancel</a>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+    {% include 'nav.html' %}
+    <div class="container section">
+      <div class="row">
+        <div class="col s6 offset-s3">
+          <div class= "row section ">
+              <div class="col s12">
+                  <h5>Really delete Book?</h5>
+              </div>
+          </div>
+          <div class="card">
+            <div class="card-content">
+              <form action="#" method="post">
+                <div class="card-image">
+                  <img src="/static/images/default_book.jpg">
+                  <span class="card-title">{{book.title}}</span>
                 </div>
+                <div class="section row">
+                  <div class="col">
+                    <button class="btn waves-effect red " id="submit" type="submit">
+                        <i class="material-icons right">delete</i>Delete
+                    </button>
+                  </div>
+                  <div class="col">
+                    <a class="waves-effect orange btn" href = "{{url_for('showBook', book_id = book.book_id, category_id = book.category_id)}}"><i class="material-icons left">cancel</i>Cancel</a>
+                  </div>
+                </div>
+              </form>
             </div>
+          </div>
         </div>
-        <!--JavaScript at end of body for optimized loading-->
-        <script type="text/javascript" src="/static/materialize/js/materialize.min.js"></script>
-    </body>
+      </div>
+    </div>
+    <!--JavaScript at end of body for optimized loading-->
+    <script type="text/javascript" src="/static/materialize/js/materialize.min.js"></script>
+  </body>
 </html>

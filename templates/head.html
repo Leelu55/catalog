@@ -1,11 +1,31 @@
+<!DOCTYPE html>
 <head>
-    <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="/static/materialize/css/materialize.min.css"  media="screen,projection"/>
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import materialize.css-->
+  <link type="text/css" rel="stylesheet" href="/static/materialize/css/materialize.min.css"  media="screen,projection"/>
 
-    <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>{{page_title}}</title>
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{{page_title}}</title>
+  <style type="text/css">
+    body {
+      background-color: #e9bfb1;
+      background-image: url("data:image/svg+xml,%3Csvg width='40' height='1' viewBox='0 0 40 1' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h20v1H0z' fill='%23ff0000' fill-opacity='0.13' fill-rule='evenodd'/%3E%3C/svg%3E");
+    }
+  </style>
+
+  <script>
+    console.error('running inline js block 1')
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('navigation').addEventListener('click', function() { alert(123) })
+    })
+  </script>
+
+  <script type="text/javascript" src="/static/external.js"></script>
+
+  <script>
+    console.error('running inline js block 2')
+  </script>
 
 </head>
