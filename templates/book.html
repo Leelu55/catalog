@@ -2,7 +2,7 @@
 <html>
     <head>
 
-        {% include 'head.html' %}
+      {% include 'head.html' %}
 
     </head>
 
@@ -15,45 +15,44 @@
           <div class="col s6 offset-s3">
             <div class="card">
               <div class="card-image">
-                  <img src="/static/images/default_book.jpg">
+                  <img src="{{ url_for('static', filename= 'images/'+ book.image) }}">
                   <span class="card-title">{{book.title}}</span>
               </div>
               <div class="card-content">
-                  <div class="row">
-                      <div class="col s12">
-                          <div class="col"><i class="material-icons prefix">account_circle</i></div>
-                          <div class="col s2">Author</div>
-                          <div class="col s9">{{book.author}}</div>
-                      </div>
-                  </div>
-
-                  <div class="row">
-                      <div class="col s12">
-                          <div class="col"><i class="material-icons prefix">description</i></div>
-                          <div class="col s2">Description: </div>
-                          <div class="col s9">{{book.description}}</div>
-                      </div>
-                  </div>
-
-                  <div class="row">
-                      <div class="col s12">
-                          <div class="col"><i class="material-icons prefix">apps</i></div>
-                          <div class="col s2">Category</div>
-                          <div class="col s9">{{category.name}}</div>
-                      </div>
-                  </div>
-                {% if user %}
-                    <div class="card-action">
-                        <div class="section row no-pad-bot">
-                            <div class="col">
-                                <a class="waves-effect blue btn" href = "{{url_for('editBook', book_id = book.book_id)}}"><i class="material-icons left">edit</i>Edit</a>
-                            </div>
-                            <div class="col">
-                                <a class="waves-effect red btn" href = "{{url_for('deleteBook', book_id = book.book_id)}}"><i class="material-icons left">delete</i>Delete</a>
-                            </div>
-                        </div>
-                        </div>
+                <div class="row">
+                    <div class="col s12">
+                        <div class="col"><i class="material-icons prefix">account_circle</i></div>
+                        <div class="col s2">Author</div>
+                        <div class="col s9">{{book.author}}</div>
                     </div>
+                </div>
+
+                <div class="row">
+                    <div class="col s12">
+                        <div class="col"><i class="material-icons prefix">description</i></div>
+                        <div class="col s2">Description: </div>
+                        <div class="col s9">{{book.description}}</div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col s12">
+                        <div class="col"><i class="material-icons prefix">apps</i></div>
+                        <div class="col s2">Category</div>
+                        <div class="col s9">{{category.name}}</div>
+                    </div>
+                </div>
+                {% if user and book.user_id == user.id %}
+                  <div class="card-action">
+                    <div class="section row no-pad-bot">
+                      <div class="col">
+                        <a class="waves-effect blue btn" href = "{{url_for('editBook', book_id = book.book_id)}}"><i class="material-icons left">edit</i>Edit</a>
+                      </div>
+                      <div class="col">
+                        <a class="waves-effect red btn" href = "{{url_for('deleteBook', book_id = book.book_id)}}"><i class="material-icons left">delete</i>Delete</a>
+                      </div>
+                     </div>
+                  </div>
                 {% endif %}
               </div>
             </div>
@@ -62,12 +61,13 @@
       </div>
 
       {% if user %}
-          <div class="fixed-action-btn">
-              <a class="btn-floating btn-large red" href="{{url_for('addBook')}}">
-                  <i class="large material-icons">add</i>
-              </a>
-          </div>
+        <div class="fixed-action-btn">
+            <a class="btn-floating btn-large red" href="{{url_for('addBook')}}">
+                <i class="large material-icons">add</i>
+            </a>
+        </div>
       {% endif %}
+
       <!--JavaScript at end of body for optimized loading-->
       <script type="text/javascript" src="/static/materialize/js/materialize.min.js"></script>
     </body>

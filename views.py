@@ -26,6 +26,7 @@ Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 app = Flask(__name__)
+google_api_key = "AIzaSyAofMUuLEJMOPrkHenk93dhuH1rgp_RM8w"
 
 APPLICATION_NAME = "Library"
 
@@ -89,8 +90,7 @@ def revoke():
     credentials = google.oauth2.credentials.Credentials(
         **login_session['credentials'])
 
-    revoke =
-    requests.post(
+    revoke = requests.post(
         'https://accounts.google.com/o/oauth2/revoke',
         params={'token': credentials.token},
         headers={'content-type': 'application/x-www-form-urlencoded'})
@@ -116,7 +116,7 @@ def showLibrary():
 
     categories = session.query(Category).all()
     recentBooks = session.query(Book).order_by(
-        desc(Book.created_date)).limit(10).all()
+        desc(Book.created_date)).limit(6).all()
     pageTitle = "Library"
     if 'credentials' not in login_session:
         return render_template(
@@ -198,17 +198,18 @@ def showBooksForCategory(category_id):
             'books.html',
             category=category,
             books=booksForCategory,
-            page_title=pageTitle)
+            page_title=pageTitle,)
     else:
         user = session.query(User).filter_by(
             email=login_session['email']).one()
         booksOfUser = session.query(Book).filter_by(
-            user_id=user.id, category_id=category_id).all()
-        print(booksOfUser)
+            category_id=category_id, user_id=user.id)
+
         return render_template(
             'books.html',
             category=category,
-            books=booksOfUser,
+            books=booksForCategory,
+            user_books=booksOfUser,
             user=user,
             page_title=pageTitle)
 
@@ -218,6 +219,7 @@ def showBook(category_id, book_id):
     book = session.query(Book).filter_by(book_id=book_id).one()
     category = session.query(Category).filter_by(id=category_id).one()
     pageTitle = book.title
+    bookImagePath = "images/" + book.image
 
     if 'username' not in login_session:
         return render_template(
@@ -234,7 +236,6 @@ def showBook(category_id, book_id):
             category=category,
             user=user,
             page_title=pageTitle)
-
 
 @app.route('/library/add_book', methods=['GET', 'POST'])
 def addBook():
@@ -250,12 +251,13 @@ def addBook():
             author=request.form['author_editor'],
             category_id=categoryID,
             description=request.form['description'],
-            user_id=login_session['user_id']
+            user_id=login_session['user_id'],
+            image=request.form['image']
         )
 
         session.add(newBook)
-        flash('New Book %s Successfully Created' % newBook.title)
         session.commit()
+
         return redirect(url_for('showLibrary'))
     else:
         pageTitle = "Add new Book"
@@ -285,6 +287,10 @@ def editBook(book_id):
             book.author = request.form['author']
         if request.form['category']:
             book.category_id = request.form['category']
+        if request.form['image']:
+            book.image = request.form['image']
+        else:
+            book.image = url_for('static', filename='images/'+ default_book.jpg)
 
         session.add(book)
         session.commit()
@@ -310,7 +316,6 @@ def deleteBook(book_id):
         bookToDelete = session.query(Book).filter_by(book_id=book_id).one()
         session.delete(bookToDelete)
         session.commit()
-        flash('Book Deleted')
         return redirect(url_for('showLibrary'))
     pageTitle = "Delete Book"
     return render_template(

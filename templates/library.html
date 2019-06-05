@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-
-   {% include 'head.html' %}
-
+    {% include 'head.html' %}
   </head>
 
   <body>
@@ -11,59 +9,72 @@
     {% include 'nav.html' %}
 
     <div class="container">
-      <div class="row">
-        <h4>Categories</h4>
+      <div class="section">
+        <div class="row green lighten-1">
 
-        {% for category in categories %}
-          <div class="col m4">
-            <div class=card>
-              <div class="card-image">
-                <img src="/static/images/default_book.jpg">
-                <span class="card-title">{{category.name}}</span>
-              </div>
-              <div class="card-content">
-                <p>All {{category.name}} Books</p>
-              </div>
-              <div class="card-action">
-                <div class="section row">
-                  <div class="col">
-                    <a class="waves-effect teal btn" href = "{{url_for('showBooksForCategory', category_id = category.id)}}"><i class="material-icons left">apps</i>Books</a>
-                  </div>
-                </div>
+          <div class="section no-pad-bot">
+            <div class="row">
+              <div class="col s7 m4">
+                <h4>Categories</h4>
               </div>
             </div>
           </div>
-        {% endfor %}
 
-      </div>
-    </div>
-
-    <div class="container">
-      <div class="row">
-        <h4>Recently Added Books</h4>
-        {% for recent_book in recent_books %}
-          <div class="col m4">
-            <div class=card>
-              <div class="card-image">
-                <img src="/static/images/default_book.jpg">
-                <span class="card-title">{{recent_book.title}}</span>
-              </div>
-
-              <div class="card-action">
-                <div class="section row">
-                  <div class="col">
-                    <a class="waves-effect teal btn" href = "{{url_for('showBook', book_id = recent_book.book_id, category_id = recent_book.category_id)}}"><i class="material-icons left">details</i>Details</a>
-                  </div>
-                  {% if user %}
+          {% for category in categories %}
+            <div class="col m4">
+              <div class="card small">
+                <div class="card-image">
+                  <img src="{{ url_for('static', filename= 'images/'+ category.image)}}" alt="image of {{category.name}} category">
+                  <span class="card-title">{{category.name}}</span>
+                </div>
+                <div class="card-content">
+                  <p> Books in {{category.name}} </p>
+                </div>
+                <div class="card-action">
+                  <div class="section row">
                     <div class="col">
-                      <a class="waves-effect blue btn" href = "{{url_for('showBook', book_id = recent_book.book_id, category_id = recent_book.category_id)}}"><i class="material-icons left">edit</i>Edit</a>
+                      <a class="waves-effect teal btn" href="{{url_for('showBooksForCategory', category_id = category.id)}}">
+                        <i class="material-icons left">apps</i>Books</a>
                     </div>
-                  {% endif %}
+                  </div>
                 </div>
               </div>
             </div>
+          {% endfor %}
+        </div>
+
+        <div class="row blue lighten-1">
+          <div class="section no-pad-bot">
+            <div class="row">
+              <div class="col s7 m4">
+                <h4>Recently Added Books</h4>
+              </div>
+            </div>
           </div>
-        {% endfor %}
+          {% for recent_book in recent_books %}
+            <div class="col s7 m4">
+              <div class="card horizontal">
+                <div class="card-image">
+                  <img src="{{ url_for('static', filename= 'images/'+ recent_book.image) }}" style="width:150px;height:220px">
+                </div>
+
+                <div class="card-stacked">
+                  <div class="card-content">
+                    <h6>{{recent_book.title}}</h6>
+                    <p>{{recent_book.author}}</p>
+                  </div>
+
+                  <div class="card-action">
+                    <div class="col">
+                      <a class="waves-effect teal btn" href = "{{url_for('showBook', book_id = recent_book.book_id, category_id = recent_book.category_id)}}"><i class="material-icons left">details</i>Info</a>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
       </div>
     </div>
 

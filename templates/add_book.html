@@ -24,15 +24,16 @@
               <form action="#" method="post">
 
                 <div class="row">
-                  <div class="input-field col ">
+                  <div class="input-field col s11 ">
                     <i class="material-icons prefix">title</i>
-                    <input name="title" id="title" type="text" class="validate" placeholder="Alice in Wonderland">
+                    <input name="title" id="title" type="text" class="validate" placeholder="Alice in Wonderland"
+                    oninput= "changeBookTitleHandler()">
                     <label for="title">Title</label>
                   </div>
                 </div>
 
                 <div class="row">
-                  <div class="input-field col">
+                  <div class="input-field col s11">
                     <i class="material-icons prefix">description</i>
                     <input name="description" id="description" type="text" class="validate" placeholder="A wonderful Book about a girl lost in a crazy world.">
                     <label for="description">Description</label>
@@ -40,12 +41,21 @@
                 </div>
 
                 <div class="row">
-                  <div class="input-field col">
+                  <div class="input-field col s11">
                     <i class="material-icons prefix">account_circle</i>
                     <input name="author_editor" id="author_editor" type="text" class="validate" placeholder="Lewis Carrol">
                     <label for="author_editor">Author or Editor</label>
                   </div>
                 </div>
+
+                <div class="row">
+                  <div class="input-field col s11">
+                    <i class="material-icons prefix">account_circle</i>
+                    <input name="image" id="image" type="text" class="validate" placeholder="Upload Pictures not yet implemented, only use of static content possible">
+                    <label for="image">Book Image</label>
+                  </div>
+                </div>
+
 
                 <div class="row">
                   <div class="input-field col s4">
@@ -87,6 +97,12 @@
                           </label>
                         </p>
 
+                        <p>
+                          <label>
+                            <input class="with-gap" name="category" type="radio" id="5" value="5" />
+                            <span>Graphic Novels</span>
+                          </label>
+                        </p>
                       </div>
                     </div>
                   </div>

@@ -1,0 +1,10 @@
+.flash-message {
+  background: red;
+  position: fixed;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  padding: 10px;
+  border-radius: 3px;
+}

@@ -22,12 +22,23 @@
 
           <div class="card">
             <div class="card-content">
+
               <form action="#" method="post">
+
                 <div class="row">
                   <div class="input-field col s10">
                     <i class="material-icons prefix">title</i>
-                    <input value="{{book.title}}" name="title" id="title" type="text" class="validate">
+                    <input value="{{book.title}}" name="title" id="title" type="text" class="validate"
+                    oninput= "changeBookTitleHandler()">
                     <label for="title">Title</label>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="input-field col s10">
+                    <i class="material-icons prefix">image</i>
+                    <input value="{{ book.image}}" id="image" name="image" type="text" class="validate">
+                    <label for="image">Image</label>
                   </div>
                 </div>
 
@@ -62,39 +73,53 @@
                       <div class="col s12 offset-s1">
                         <p>
                           <label>
-                            <input class="with-gap" name="category" type="radio" id="1" value="1" checked="{{ book.category_id == 1 }}" />
+                            <input class="with-gap" name="category" type="radio" id="1" value="1"
+                            {% if book.category_id == 1 %} checked {% endif %}/>
                             <span>Fiction</span>
                           </label>
                         </p>
 
                         <p>
                           <label>
-                            <input class="with-gap" name="category" type="radio" id="2" value="2" checked="{{ book.category_id == 2 }}"/>
+                            <input class="with-gap" name="category" type="radio" id="2" value="2"
+                            {% if book.category_id == 2 %} checked {% endif %}/>
                             <span>Poetry</span>
-                          </label>
+                            </label>
                         </p>
 
                         <p>
                           <label>
-                            <input class="with-gap" name="category" type="radio" id="3" value="3" checked="{{ book.category_id == 3 }}" />
+                            <input class="with-gap" name="category" type="radio" id="3" value="3"
+                            {% if book.category_id == 3 %} checked {% endif %}/>
                           <span>Non-Fiction</span>
                           </label>
                         </p>
 
                         <p>
                           <label>
-                            <input class="with-gap" name="category" type="radio" id="4" value="4" checked="{{ book.category_id == 4 }}" />
+                            <input class="with-gap" name="category" type="radio" id="4" value="4"
+                            {% if book.category_id == 4 %} checked {% endif %}/>
                             <span>Children's Books</span>
                           </label>
                         </p>
+
+                        <p>
+                          <label>
+                            <input class="with-gap" name="category" type="radio" id="5" value="5"
+                            {% if book.category_id == 5 %} checked {% endif %}/>
+                            <span>Graphic Novels</span>
+                          </label>
+                        </p>
+
                       </div>
                     </div>
 
                   </div>
                 </div>
+
                 <div class="row">
                   <div class ="col">
-                     <button class="btn waves-effect blue" id="submit" type="submit">
+                     <button class="btn waves-effect blue" id="submit" type="submit" >
                         <i class="material-icons left ">update</i>Update
                       </button>
                   </div>
