@@ -26,7 +26,6 @@ Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 app = Flask(__name__)
-google_api_key = "AIzaSyAofMUuLEJMOPrkHenk93dhuH1rgp_RM8w"
 
 APPLICATION_NAME = "Library"
 
