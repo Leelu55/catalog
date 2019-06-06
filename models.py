@@ -21,7 +21,7 @@ class Category(Base):
 
     name = Column(String(250), nullable=False, index=True)
     id = Column(Integer, primary_key=True)
-    image = Column(String)
+    image = Column(String, default="cat_default.jpg")
 
     @property
     def serialize(self):
@@ -40,7 +40,7 @@ class Book(Base):
     book_id = Column(Integer, primary_key=True)
     author = Column(String)
     description = Column(String)
-    image = Column(String)
+    image = Column(String, default="default_book.jpg")
     number_of_reads = Column(Integer, default=0)
     category_id = Column(Integer, ForeignKey('category.id'))
     category = relationship(Category)

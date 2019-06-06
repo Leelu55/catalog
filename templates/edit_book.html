@@ -71,49 +71,18 @@
 
                     <div class="row">
                       <div class="col s12 offset-s1">
+                        {% for category in categories%}
                         <p>
                           <label>
-                            <input class="with-gap" name="category" type="radio" id="1" value="1"
-                            {% if book.category_id == 1 %} checked {% endif %}/>
-                            <span>Fiction</span>
+                            <input class="with-gap" name="category" type="radio" id="{{category.id}}" value="{{category.id}}"
+                            {% if book.category_id == category.id %} checked {% endif %}/>
+                            <span>{{category.name}}</span>
                           </label>
                         </p>
-
-                        <p>
-                          <label>
-                            <input class="with-gap" name="category" type="radio" id="2" value="2"
-                            {% if book.category_id == 2 %} checked {% endif %}/>
-                            <span>Poetry</span>
-                            </label>
-                        </p>
-
-                        <p>
-                          <label>
-                            <input class="with-gap" name="category" type="radio" id="3" value="3"
-                            {% if book.category_id == 3 %} checked {% endif %}/>
-                          <span>Non-Fiction</span>
-                          </label>
-                        </p>
-
-                        <p>
-                          <label>
-                            <input class="with-gap" name="category" type="radio" id="4" value="4"
-                            {% if book.category_id == 4 %} checked {% endif %}/>
-                            <span>Children's Books</span>
-                          </label>
-                        </p>
-
-                        <p>
-                          <label>
-                            <input class="with-gap" name="category" type="radio" id="5" value="5"
-                            {% if book.category_id == 5 %} checked {% endif %}/>
-                            <span>Graphic Novels</span>
-                          </label>
-                        </p>
+                        {% endfor %}
 
                       </div>
                     </div>
-
                   </div>
                 </div>
 

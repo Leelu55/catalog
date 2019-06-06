@@ -26,7 +26,6 @@ Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 app = Flask(__name__)
-google_api_key = "AIzaSyAofMUuLEJMOPrkHenk93dhuH1rgp_RM8w"
 
 APPLICATION_NAME = "Library"
 
@@ -117,6 +116,7 @@ def showLibrary():
     categories = session.query(Category).all()
     recentBooks = session.query(Book).order_by(
         desc(Book.created_date)).limit(6).all()
+
     pageTitle = "Library"
     if 'credentials' not in login_session:
         return render_template(
@@ -246,13 +246,18 @@ def addBook():
         category = session.query(Category).filter_by(
             id=request.form['category']).one()
         categoryID = category.id
+
+        if request.form['image'] == "":
+            imageString = "default_book.jpg"
+        else:
+            imageString = request.form['image']
         newBook = Book(
             title=request.form['title'],
             author=request.form['author_editor'],
             category_id=categoryID,
             description=request.form['description'],
             user_id=login_session['user_id'],
-            image=request.form['image']
+            image=imageString
         )
 
         session.add(newBook)
@@ -260,13 +265,15 @@ def addBook():
 
         return redirect(url_for('showLibrary'))
     else:
+        categories = session.query(Category).all()
         pageTitle = "Add new Book"
         user = session.query(User).filter_by(
             email=login_session['email']).one()
         return render_template(
             'add_book.html',
             user=user,
-            page_title=pageTitle)
+            page_title=pageTitle,
+            categories=categories)
 
 
 @app.route('/library/<int:book_id>/edit', methods=['GET', 'POST'])
@@ -277,7 +284,6 @@ def editBook(book_id):
     book = session.query(Book).filter_by(book_id=book_id).one()
 
     if request.method == 'POST':
-        book = session.query(Book).filter_by(book_id=book_id).one()
 
         if request.form['title']:
             book.title = request.form['title']
@@ -287,10 +293,10 @@ def editBook(book_id):
             book.author = request.form['author']
         if request.form['category']:
             book.category_id = request.form['category']
-        if request.form['image']:
+        if request.form['image'] != "":
             book.image = request.form['image']
         else:
-            book.image = url_for('static', filename='images/'+ default_book.jpg)
+            book.image = "default_book.jpg"
 
         session.add(book)
         session.commit()
@@ -299,11 +305,14 @@ def editBook(book_id):
 
     else:
         pageTitle = "Edit Book"
+        categories = session.query(Category).all()
+
         return render_template(
             'edit_book.html',
             book=book,
             user_name=login_session['username'],
-            page_title=pageTitle)
+            page_title=pageTitle,
+            categories=categories)
 
 
 @app.route('/library/<int:book_id>/delete', methods=['GET', 'POST'])

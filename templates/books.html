@@ -15,8 +15,8 @@
           <div class="row blue">
             <div class="section no-pad-bot">
               <div class="row">
-                <div class="col s7 m4">
-                  <h4>All {{category.name}} Books</h4>
+                <div class="col s12 m12">
+                  <h4>Books in {{category.name}}</h4>
                 </div>
               </div>
             </div>
@@ -25,7 +25,7 @@
               <div class="col s7 m4">
                 <div class="card horizontal">
                   <div class="card-image">
-                    <img src="{{ url_for('static', filename= 'images/'+ book.image) }}" style="width:150px;height:220px">
+                    <img src="{{ url_for('static', filename= 'images/'+ book.image) }}">
                   </div>
 
                   <div class="card-stacked">
@@ -35,10 +35,14 @@
                     </div>
 
                     <div class="card-action">
+                      <div class="col">
+                        <a class="waves-effect teal btn" href = "{{url_for('showBook', book_id = book.book_id, category_id = book.category_id)}}"><i class="material-icons left">details</i>Info</a>
+                      </div>
+                      {% if user.id == book.user_id%}
                         <div class="col">
-                          <a class="waves-effect teal btn" href = "{{url_for('showBook', book_id = book.book_id, category_id = book.category_id)}}"><i class="material-icons left">details</i>Info</a>
+                          <a class="waves-effect blue btn" href = "{{url_for('showBook', book_id = book.book_id, category_id = book.category_id)}}"><i class="material-icons left">edit</i></a>
                         </div>
-
+                      {% endif %}
                     </div>
                   </div>
                 </div>
@@ -52,7 +56,7 @@
               <div class="section  no-pad-bot">
                 <div class="row">
                   <div class="col s12 ">
-                    <h4>{{user.name}}'s' {{category.name}} Books</h4>
+                    <h4>{{user.name}}'s Books in {{category.name}}</h4>
                   </div>
                 </div>
               </div>
@@ -61,7 +65,7 @@
                <div class="col s7 m4">
                   <div class="card horizontal">
                     <div class="card-image">
-                      <img src="{{ url_for('static', filename= 'images/'+ book.image) }}" style="width:150px;height:220px">
+                      <img src="{{ url_for('static', filename= 'images/'+ book.image) }}">
                     </div>
 
                     <div class="card-stacked">
@@ -74,6 +78,11 @@
                           <a class="waves-effect teal btn" href = "{{url_for('showBook', book_id = book.book_id, category_id = book.category_id)}}"><i class="material-icons left">details</i>Info</a>
                         </div>
 
+                        {% if user.id == book.user_id%}
+                          <div class="col">
+                            <a class="waves-effect blue btn" href = "{{url_for('showBook', book_id = book.book_id, category_id = book.category_id)}}"><i class="material-icons left">edit</i></a>
+                          </div>
+                        {% endif %}
                       </div>
                     </div>
                   </div>

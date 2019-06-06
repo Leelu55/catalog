@@ -8,3 +8,36 @@
   padding: 10px;
   border-radius: 3px;
 }
+
+.card .card-image img {
+  max-height: 220px;
+  padding: 5px;
+  padding-bottom: 0;
+  object-fit: cover;
+  align-content: center;
+}
+
+.card.horizontal .card-image {
+  object-fit: cover;
+  max-width: 120px;
+  height: 200px
+}
+
+.card.horizontal .card-image img {
+  padding: 5px;
+  height: 100%
+}
+
+.card.horizontal .card-content h6 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 230px;
+}
+
+.card .card-image .card-title {
+  background-color: rgba(239, 83, 80,0.8);
+  font-weight: bold;
+  margin-left: 5px;
+
+}

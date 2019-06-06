@@ -13,7 +13,9 @@
       <div class="container section">
         <div class="row">
           <div class="col s6 offset-s3">
-            <div class="card">
+
+
+            <div class="card ">
               <div class="card-image">
                   <img src="{{ url_for('static', filename= 'images/'+ book.image) }}">
                   <span class="card-title">{{book.title}}</span>
@@ -22,7 +24,6 @@
                 <div class="row">
                     <div class="col s12">
                         <div class="col"><i class="material-icons prefix">account_circle</i></div>
-                        <div class="col s2">Author</div>
                         <div class="col s9">{{book.author}}</div>
                     </div>
                 </div>
@@ -30,7 +31,6 @@
                 <div class="row">
                     <div class="col s12">
                         <div class="col"><i class="material-icons prefix">description</i></div>
-                        <div class="col s2">Description: </div>
                         <div class="col s9">{{book.description}}</div>
                     </div>
                 </div>
@@ -38,10 +38,10 @@
                 <div class="row">
                     <div class="col s12">
                         <div class="col"><i class="material-icons prefix">apps</i></div>
-                        <div class="col s2">Category</div>
                         <div class="col s9">{{category.name}}</div>
                     </div>
                 </div>
+
                 {% if user and book.user_id == user.id %}
                   <div class="card-action">
                     <div class="section row no-pad-bot">
