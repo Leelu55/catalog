@@ -7,18 +7,16 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-Materialize CSS
-SQL Alchemy
-Flask
-Google OAuth
+- Python2 Python
+- SQLAlchemy Toolkit and ORM
+- Flask Python web framework
+- Materialize CSS
+- Google OAuth
 
-
+### Installing
 ```
 place client_secrets.json file in the main directory of the project ("/catalog")
 ```
-
-### Installing
-
 A step by step series of examples that tell you how to get a development env running
 
 Say what the step will be
