@@ -1,10 +1,8 @@
 
-# Project Title
+# Collective Library
 
-
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+[Full Stack Web Developer Nanodegree](https://eu.udacity.com/course/full-stack-web-developer-nanodegree--nd004) task **The Item Catalog** Task:
+The **catalog** web app written in Python, HTML, CSS and Javascript provides lists of books within book categories like fiction or poetry, using Google Oauth 2.0 as a user registration and authentication system. Logged-in users can add, edit and delete books.
 
 ### Prerequisites
 
@@ -50,11 +48,11 @@ Get an Account [here](https://accounts.google.com/signup/v2/webcreateaccount?ser
 Obtain Google authorization credentials following these [instructions](https://developers.google.com/identity/protocols/OAuth2WebServer#enable-apis)
 Place the client_secrets.json file in the main directory of the project ("/catalog").
 
-### Installing
+## Getting Started
 
-1. Install all Prerequisites
+1. Install all [prerequisites](https://github.com/Leelu55/catalog#prerequisites)
 
-2.Run the initializer script to create the database and populate it with test data
+2. Run the initializer script to create the database and populate it with test data
 
 ```
 python lotsof_books_categories.py
@@ -80,21 +78,14 @@ For adding images to new books, place these in the /statics/images folder and us
 * [Materialize](https://materializecss.com/) - CSS Framework
 * [Google APIs Client Library for Python](https://developers.google.com/api-client-library/python/) - OAuth Provider
 
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-
 ## Authors
 
-* **Maria**
+* **[[Maria]](https://github.com/Leelu55/)**
 
 See also the list of [contributors](https://github.com/Leelu55/catalog/contributors) who participated in this project.
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+* Inspirations : Full Stack Web Developer Nanodegree code
 
 
