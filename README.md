@@ -2,9 +2,14 @@
 # Collective Library
 
 [Full Stack Web Developer Nanodegree](https://eu.udacity.com/course/full-stack-web-developer-nanodegree--nd004) task **The Item Catalog** Task:
-The **catalog** web app written in Python, HTML, CSS and Javascript provides lists of books within book categories like fiction or poetry, using Google Oauth 2.0 as a user registration and authentication system. Logged-in users can add, edit and delete books.
 
-### Prerequisites
+- The **catalog** web app written in Python, HTML, CSS and Javascript provides lists of books within book categories like fiction or poetry
+
+- Using Google Oauth 2.0 as a user registration and authentication system.
+
+- Logged-in users can add, edit and delete books.
+
+## Prerequisites
 
 - **Python 2.7 Python**
 
