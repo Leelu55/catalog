@@ -38,10 +38,12 @@
                       <div class="col">
                         <a class="waves-effect teal btn" href = "{{url_for('showBook', book_id = book.book_id, category_id = book.category_id)}}"><i class="material-icons left">details</i>Info</a>
                       </div>
-                      {% if user.id == book.user_id%}
-                        <div class="col">
-                          <a class="waves-effect blue btn" href = "{{url_for('showBook', book_id = book.book_id, category_id = book.category_id)}}"><i class="material-icons left">edit</i></a>
-                        </div>
+                      {% if user %}
+                        {% if user.id == book.user_id%}
+                          <div class="col">
+                            <a class="waves-effect blue btn" href = "{{url_for('showBook', book_id = book.book_id, category_id = book.category_id)}}"><i class="material-icons left">edit</i></a>
+                          </div>
+                        {% endif %}
                       {% endif %}
                     </div>
                   </div>

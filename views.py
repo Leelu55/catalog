@@ -14,7 +14,6 @@ import os
 
 import google.oauth2.credentials
 import google_auth_oauthlib.flow
-import googleapiclient.discovery
 
 import requests
 from flask import make_response, session as login_session
