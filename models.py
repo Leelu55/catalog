@@ -41,9 +41,8 @@ class Book(Base):
     author = Column(String)
     description = Column(String)
     image = Column(String, default="default_book.jpg")
-    number_of_reads = Column(Integer, default=0)
     category_id = Column(Integer, ForeignKey('category.id'))
-    category = relationship(Category)
+    category = relationship(Category, backref='books')
     user_id = Column(Integer, ForeignKey('user.id'))
     user = relationship(User)
     created_date = Column(DateTime(timezone=True), server_default=func.now())
@@ -57,7 +56,6 @@ class Book(Base):
              'book_id': self.book_id,
              'image': self.image,
              'description': self.description,
-             'number_of_reads': self.number_of_reads,
              'created_date': self.created_date
         }
 

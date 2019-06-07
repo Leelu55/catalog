@@ -4,11 +4,7 @@
     <div class="row">
       <div class="col s12 m6 l3">
         <a href="{{url_for('showLibrary')}}" class="brand-logo">
-          {% if user %}
-              {{user.name}}'s Library
-          {% else %}
-              Collective Library
-          {% endif %}
+          Collective Library
         </a>
       </div>
       <ul id="nav-mobile" class="right hide-on-med-and-down">

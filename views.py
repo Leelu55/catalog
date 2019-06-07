@@ -1,22 +1,25 @@
+# Import table Classes from database setup file (models.py)
 from models import Base, User, Category, Book
+
+# FLASK
 from flask import Flask, request, url_for, abort, g, redirect
 from flask import jsonify, render_template
+from flask import make_response, session as login_session
 
 # SQLALCHEMY ORM
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship, sessionmaker
+from sqlalchemy.orm import relationship, sessionmaker, joinedload
 from sqlalchemy import create_engine, desc
 
-import json
-import random
-import string
-import os
-
+# Google OAuth
 import google.oauth2.credentials
 import google_auth_oauthlib.flow
 
 import requests
-from flask import make_response, session as login_session
+import json
+import random
+import string
+import os
 
 engine = create_engine('sqlite:///library.db',
                        connect_args={'check_same_thread': False})
@@ -78,7 +81,7 @@ def oauth2callback():
     login_session['credentials'] = credentials_to_dict(credentials)
     return redirect(url_for('showLibrary'))
 
-
+# log out
 @app.route('/revoke')
 def revoke():
     if 'credentials' not in login_session:
@@ -107,7 +110,7 @@ def clear_credentials():
         login_session.clear()
     return redirect(url_for('showLibrary'))
 
-
+# display main page
 @app.route('/')
 @app.route('/library')
 def showLibrary():
@@ -180,7 +183,6 @@ def getUserID(email):
     try:
         user = session.query(User).filter_by(email=email).one()
         return user.id
-    # TODO: fix bare except
     except:
         return None
 
@@ -235,6 +237,7 @@ def showBook(category_id, book_id):
             category=category,
             user=user,
             page_title=pageTitle)
+
 
 @app.route('/library/add_book', methods=['GET', 'POST'])
 def addBook():
@@ -332,11 +335,17 @@ def deleteBook(book_id):
         user_name=login_session['username'],
         page_title=pageTitle)
 
-
+# create a library dump with all categories and the related books
 @app.route('/library.json')
 def libraryJSON():
-    categories = session.query(Category).all()
-    return jsonify(Category=[c.serialize for c in categories])
+
+    cats = session.query(Category).options(joinedload(Category.books)).all()
+    categories = [dict(c.serialize,
+                       books=[b.serialize for b in c.books]) for c in cats]
+
+    libraryDump = dict(categories=categories)
+
+    return jsonify(libraryDump)
 
 
 @app.route('/library/<int:category_id>/books.json')
@@ -368,7 +377,9 @@ def credentials_to_dict(credentials):
 
 
 if __name__ == '__main__':
+    # setting an environment variable to test the app locally without https
     os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
+    #  set a secret key to use flask sessions
     app.secret_key = os.urandom(24)
     app.debug = True
     app.run(host='0.0.0.0', port=8000)
