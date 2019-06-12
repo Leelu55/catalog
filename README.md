@@ -34,7 +34,7 @@ pip install SQLAlchemy
 
 [Download and Installation Instructions](http://flask.pocoo.org/docs/1.0/installation/#installation)
 ```
-  pip install pip
+  pip install flask
 ```
 
 - **Materialize CSS**
