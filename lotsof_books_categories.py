@@ -30,6 +30,7 @@ category5 = Category(name="Poetry",
                      )
 user1 = User(name="Admin User", email="maria@yalpani.de")
 
+session.add(user1)
 session.add(category1)
 session.add(category2)
 session.add(category3)
