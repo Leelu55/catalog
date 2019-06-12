@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from models import Category, Base, Book
+from models import Category, Base, Book, User
 
 engine = create_engine('postgresql://catalog:password@localhost:5432/catalog')
 
