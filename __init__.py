@@ -28,7 +28,7 @@ DBSession = sessionmaker(bind=engine)
 session = DBSession()
 app = Flask(__name__)
 
-APPLICATION_NAME = "Catalog"
+APPLICATION_NAME = "catalog"
 
 # This variable specifies the name of a file that contains the OAuth 2.0
 # information for this application, including its client_id and
