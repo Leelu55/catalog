@@ -3,7 +3,7 @@ from sqlalchemy.orm import sessionmaker
 
 from models import Category, Base, Book
 
-engine = create_engine('sqlite:///library.db')
+engine = create_engine('sqlite:///catalog.db')
 
 Base.metadata.bind = engine
 

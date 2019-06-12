@@ -21,7 +21,7 @@ import random
 import string
 import os
 
-engine = create_engine('sqlite:///library.db',
+engine = create_engine('sqlite:///catalog.db',
                        connect_args={'check_same_thread': False})
 
 Base.metadata.bind = engine
@@ -29,7 +29,7 @@ DBSession = sessionmaker(bind=engine)
 session = DBSession()
 app = Flask(__name__)
 
-APPLICATION_NAME = "Library"
+APPLICATION_NAME = "Catalog"
 
 # This variable specifies the name of a file that contains the OAuth 2.0
 # information for this application, including its client_id and
