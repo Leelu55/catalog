@@ -28,6 +28,7 @@ category4 = Category(name="Graphic Novel",
 category5 = Category(name="Poetry",
                      image="cat_poetry.jpg"
                      )
+user1 = User(name="Admin User", email="maria@yalpani.de")
 
 session.add(category1)
 session.add(category2)
