@@ -376,9 +376,4 @@ def credentials_to_dict(credentials):
 
 
 if __name__ == '__main__':
-    # setting an environment variable to test the app locally without https
-    os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
-    #  set a secret key to use flask sessions
-    app.secret_key = os.urandom(24)
-    app.debug = True
-    app.run(host='0.0.0.0', port=8080)
+    app.run()
