@@ -61,8 +61,16 @@ class Book(Base):
              'created_date': self.created_date
         }
 
+<<<<<<< HEAD
 
 engine = create_engine('postgresql://catalog:'+ os.environ.get('PGPASS')+'@localhost:5432/catalog')
+||||||| merged common ancestors
+
+engine = create_engine('postgresql://catalog:'+os.environ[PGPASS]+'@localhost:5432/catalog')
+=======
+pgpass = os.environ.get('PGPASS','default')
+engine = create_engine('postgresql://catalog:' + pgpass + '@localhost:5432/catalog')
+>>>>>>> c77261ee5277571618f8e8bab00ddd893ce7c69f
 
 
 Base.metadata.create_all(engine)
