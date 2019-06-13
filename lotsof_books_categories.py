@@ -1,6 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
+import os
 from models import Category, Base, Book, User
 
 engine = create_engine('postgresql://catalog:'+os.environ[PGPASS]+'@localhost:5432/catalog')

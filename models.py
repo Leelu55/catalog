@@ -4,6 +4,8 @@ from sqlalchemy.orm import relationship
 from sqlalchemy import create_engine
 from sqlalchemy.sql import func
 
+import os
+
 Base = declarative_base()
 
 
