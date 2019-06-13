@@ -1,28 +1,18 @@
 
-# Collective Library
+# Udacity Full Stack Web Developer Nanodegree Project: Linux Server Configuration
 
-[Full Stack Web Developer Nanodegree](https://eu.udacity.com/course/full-stack-web-developer-nanodegree--nd004) task **The Item Catalog** Task:
+[Full Stack Web Developer Nanodegree](https://eu.udacity.com/course/full-stack-web-developer-nanodegree--nd004)
 
-- The **catalog** web app written in Python, HTML, CSS and Javascript provides lists of books within book categories like fiction or poetry
+- The **catalog**(https://github.com/Leelu55/catalog) web app written in Python, HTML, CSS and Javascript provides lists of books within book categories like fiction or poetry.
 
-- Using Google Oauth 2.0 as a user registration and authentication system.
+-**catalog**is deployed to a [Amazon Lightsail](https://lightsail.aws.amazon.com/) Linux server instance with Ubuntu 18.04 OS, [Apache2](https://httpd.apache.org/) Web Server and [PostgreSQL](https://www.postgresql.org/) relational database
 
-- Logged-in users can add, edit and delete books.
+-The web application Collective Library can be accessed at [http://www.amberjack.org](http://www.amberjack.org)
 
-## Prerequisites
+-The server's IP Adress is **3.121.185.101** and the SSH Port is 2200. It is only accessible via key-based SSH authentication. The key to the grader will be provided as stated
 
-- **Python 2.7 Python**
+## Installed software
 
-Check version with:
-```
-python --version
-```
-If you haven't Python installed yet, download it [here](https://www.python.org/downloads/release/python-2716/) and follow installation instructions.
-
-- **pip package installer for Python**
-```
-  pip install pip
-```
 - **SQLAlchemy Toolkit and ORM**
 
 [Download and Installation Instructions](https://docs.sqlalchemy.org/en/13/intro.html)
@@ -41,19 +31,12 @@ pip install SQLAlchemy
 [Download and Installation Instructions](https://materializecss.com/getting-started.html)
 
 
-- **Google Account**
-
-Get an Account [here](https://accounts.google.com/signup/v2/webcreateaccount?service=cloudconsole&continue=https%3A%2F%2Fconsole.developers.google.com%2Fapis%2Fcredentials%2Foauthclient%2F757126685548-746rj9atg5nu6tsf0ouj2hcr7vpva5dn.apps.googleusercontent.com%3Fproject%3Dlibrary-240907%26hl%3Dde%26organizationId%3D56443648637&hl=de&gmb=exp&biz=false&flowName=GlifWebSignIn&flowEntry=SignUp&nogm=true)
-
 - **Google OAuth 2.0 for Server-side Web Apps**
 ```
  pip install --upgrade google-api-python-client
 ```
 
-Obtain Google authorization credentials following these [instructions](https://developers.google.com/identity/protocols/OAuth2WebServer#enable-apis)
-Place the client_secrets.json file in the main directory of the project ("/catalog").
-
-- **PostgreSQL**
+- **install PostgreSQL and create db**
 ```
 sudo apt install postgresql postgresql-contrib
 ```
@@ -61,31 +44,57 @@ sudo apt install postgresql postgresql-contrib
 ```
 sudo -u postgres createdb catalog
 ```
-
-
-
-## Getting Started
-
-1. Install all [prerequisites](https://github.com/Leelu55/catalog#prerequisites)
-
-2. Run the initializer script to create the database and populate it with test data
+The user for the postgresql (catalog) db catalog as well as the password (written into /etc/environment) were set  using
 
 ```
-python lotsof_books_categories.py
+sudo -i -u postgres
 ```
 
-3. Run the application
-
 ```
-python views.py
+postgres=# ALTER USER catalog WITH ENCRYPTED PASSWORD '<PASSWORD>'
 ```
 
-4. Visit http://localhost:8000
+also for use of PostgreSQL and Python installed **psycopg2**
 
-5. For using the authorized-user-only features like editing, deleting and adding books, **login** using your Google account.
+```
+sudo -H pip install psycopg2
+```
 
-6. Image upload is not yet implemented.
-For adding images to new books, place these in the /statics/images folder and use their file names in the book image input field
+-**Install git and commit catalog project**
+
+for testing and modifying git was installed, a git repo inside the /var/www/catalog directory initialized and used for version controll
+```
+sudo apt-get install git
+```
+inside /var/www/catalog
+```
+sudo git init
+```
+
+-**Installed python mod_wsgi package for Python 2**
+
+The mod_wsgi module for Apache2 for enabling the execution of python scripts by the web server
+```
+sudo apt-get install libapache2-mod-wsgi
+```
+
+also activated the module
+
+```
+sudo a2enmod wsgi
+```
+
+## Config changes
+
+1. **Create new user grader**
+2. **Add grader to sudoers**
+3. **Disable Root Login**
+4. **Enable SSH key authorization**
+5. **Enforce SSH key-based only remote login**
+6. **Add ports to Ubuntu Firewall and enable Firewall**
+7. **Add ports in Lightsail instance**
+8. **add SSH port on non default host**
+
 
 ## Built With
 
