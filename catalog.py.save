@@ -32,9 +32,7 @@ APPLICATION_NAME = "catalog"
 
 # This variable specifies the name of a file that contains the OAuth 2.0
 # information for this application, including its client_id and
-# client_secret. It has to be stored in the app root dir
-CLIENT_SECRETS_FILE = os.path.join(os.path.dirname(__file__), 'client_secrets.json')
-
+# client_secret. It has to be stored in the app root di"
 
 # This OAuth 2.0 access scope allows for all personal info, including any
 # personal info you've made publicly available"
@@ -377,5 +375,4 @@ def credentials_to_dict(credentials):
 
 
 if __name__ == '__main__':
-    os.environ['DEBUG'] = '1'
     app.run()
