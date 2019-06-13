@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!DOCTYPE html>
+<head>
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import materialize.css-->
+  <link type="text/css" rel="stylesheet" href="/static/materialize/css/materialize.min.css"  media="screen,projection"/>
+
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Library</title>
+  <style type="text/css">
+    body {
+      background-color: #ffefe9;
+      background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23f45e5e' fill-opacity='0.07'%3E%3Cpath d='M50 50c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10s-10-4.477-10-10 4.477-10 10-10zM10 10c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10S0 25.523 0 20s4.477-10 10-10zm10 8c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8zm40 40c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+  </style>
+  <script type="text/javascript" src="/static/js/external.js"></script>
+  <link type="text/css" rel="stylesheet" href="/static/css/styles.css"  media="screen,projection"/>
+
+</head>
+  </head>
+
+  <body>
+
+    <!DOCTYPE html>
+<nav class="red lighten-1" role="navigation" id="navigation">
+  <div class="nav-wrapper">
+    <div class="row">
+      <div class="col s12 m6 l3">
+        <a href="/library" class="brand-logo">
+          Collective Library
+        </a>
+      </div>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li>
+          
+              <a href="/authorize">Login</a>
+          
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="container">
+      <div class="section">
+        <div class="row green lighten-1">
+
+          <div class="section no-pad-bot">
+            <div class="row">
+              <div class="col s7 m4">
+                <h4>Categories</h4>
+              </div>
+            </div>
+          </div>
+
+            <div class="row">
+              
+                  <a href="/library/1/books">
+                    <div class="col m4">
+                      <div class="card">
+                        <div class="card-image">
+                          <img src="/static/images/cat_child.jpg" alt="image of Children&#39;s Books category">
+                          <a class="btn-floating halfway-fab waves-effect waves-light red" href="/library/1/books"><i class="material-icons">apps</i></a>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title">Children&#39;s Books</span>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+              
+                  <a href="/library/2/books">
+                    <div class="col m4">
+                      <div class="card">
+                        <div class="card-image">
+                          <img src="/static/images/cat_fiction.jpg" alt="image of Fiction category">
+                          <a class="btn-floating halfway-fab waves-effect waves-light red" href="/library/2/books"><i class="material-icons">apps</i></a>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title">Fiction</span>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+              
+                  <a href="/library/3/books">
+                    <div class="col m4">
+                      <div class="card">
+                        <div class="card-image">
+                          <img src="/static/images/cat_nonfict.jpg" alt="image of Non-Fiction category">
+                          <a class="btn-floating halfway-fab waves-effect waves-light red" href="/library/3/books"><i class="material-icons">apps</i></a>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title">Non-Fiction</span>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+              
+                  <a href="/library/4/books">
+                    <div class="col m4">
+                      <div class="card">
+                        <div class="card-image">
+                          <img src="/static/images/cat_graphnov.png" alt="image of Graphic Novel category">
+                          <a class="btn-floating halfway-fab waves-effect waves-light red" href="/library/4/books"><i class="material-icons">apps</i></a>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title">Graphic Novel</span>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+              
+                  <a href="/library/5/books">
+                    <div class="col m4">
+                      <div class="card">
+                        <div class="card-image">
+                          <img src="/static/images/cat_poetry.jpg" alt="image of Poetry category">
+                          <a class="btn-floating halfway-fab waves-effect waves-light red" href="/library/5/books"><i class="material-icons">apps</i></a>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title">Poetry</span>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+              
+                  <a href="/library/6/books">
+                    <div class="col m4">
+                      <div class="card">
+                        <div class="card-image">
+                          <img src="/static/images/cat_child.jpg" alt="image of Children&#39;s Books category">
+                          <a class="btn-floating halfway-fab waves-effect waves-light red" href="/library/6/books"><i class="material-icons">apps</i></a>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title">Children&#39;s Books</span>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+              
+                  <a href="/library/7/books">
+                    <div class="col m4">
+                      <div class="card">
+                        <div class="card-image">
+                          <img src="/static/images/cat_fiction.jpg" alt="image of Fiction category">
+                          <a class="btn-floating halfway-fab waves-effect waves-light red" href="/library/7/books"><i class="material-icons">apps</i></a>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title">Fiction</span>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+              
+                  <a href="/library/8/books">
+                    <div class="col m4">
+                      <div class="card">
+                        <div class="card-image">
+                          <img src="/static/images/cat_nonfict.jpg" alt="image of Non-Fiction category">
+                          <a class="btn-floating halfway-fab waves-effect waves-light red" href="/library/8/books"><i class="material-icons">apps</i></a>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title">Non-Fiction</span>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+              
+                  <a href="/library/9/books">
+                    <div class="col m4">
+                      <div class="card">
+                        <div class="card-image">
+                          <img src="/static/images/cat_graphnov.png" alt="image of Graphic Novel category">
+                          <a class="btn-floating halfway-fab waves-effect waves-light red" href="/library/9/books"><i class="material-icons">apps</i></a>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title">Graphic Novel</span>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+              
+                  <a href="/library/10/books">
+                    <div class="col m4">
+                      <div class="card">
+                        <div class="card-image">
+                          <img src="/static/images/cat_poetry.jpg" alt="image of Poetry category">
+                          <a class="btn-floating halfway-fab waves-effect waves-light red" href="/library/10/books"><i class="material-icons">apps</i></a>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title">Poetry</span>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+              
+                  <a href="/library/11/books">
+                    <div class="col m4">
+                      <div class="card">
+                        <div class="card-image">
+                          <img src="/static/images/cat_child.jpg" alt="image of Children&#39;s Books category">
+                          <a class="btn-floating halfway-fab waves-effect waves-light red" href="/library/11/books"><i class="material-icons">apps</i></a>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title">Children&#39;s Books</span>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+              
+                  <a href="/library/12/books">
+                    <div class="col m4">
+                      <div class="card">
+                        <div class="card-image">
+                          <img src="/static/images/cat_fiction.jpg" alt="image of Fiction category">
+                          <a class="btn-floating halfway-fab waves-effect waves-light red" href="/library/12/books"><i class="material-icons">apps</i></a>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title">Fiction</span>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+              
+                  <a href="/library/13/books">
+                    <div class="col m4">
+                      <div class="card">
+                        <div class="card-image">
+                          <img src="/static/images/cat_nonfict.jpg" alt="image of Non-Fiction category">
+                          <a class="btn-floating halfway-fab waves-effect waves-light red" href="/library/13/books"><i class="material-icons">apps</i></a>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title">Non-Fiction</span>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+              
+                  <a href="/library/14/books">
+                    <div class="col m4">
+                      <div class="card">
+                        <div class="card-image">
+                          <img src="/static/images/cat_graphnov.png" alt="image of Graphic Novel category">
+                          <a class="btn-floating halfway-fab waves-effect waves-light red" href="/library/14/books"><i class="material-icons">apps</i></a>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title">Graphic Novel</span>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+              
+                  <a href="/library/15/books">
+                    <div class="col m4">
+                      <div class="card">
+                        <div class="card-image">
+                          <img src="/static/images/cat_poetry.jpg" alt="image of Poetry category">
+                          <a class="btn-floating halfway-fab waves-effect waves-light red" href="/library/15/books"><i class="material-icons">apps</i></a>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title">Poetry</span>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+              
+                  <a href="/library/16/books">
+                    <div class="col m4">
+                      <div class="card">
+                        <div class="card-image">
+                          <img src="/static/images/cat_child.jpg" alt="image of Children&#39;s Books category">
+                          <a class="btn-floating halfway-fab waves-effect waves-light red" href="/library/16/books"><i class="material-icons">apps</i></a>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title">Children&#39;s Books</span>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+              
+                  <a href="/library/17/books">
+                    <div class="col m4">
+                      <div class="card">
+                        <div class="card-image">
+                          <img src="/static/images/cat_fiction.jpg" alt="image of Fiction category">
+                          <a class="btn-floating halfway-fab waves-effect waves-light red" href="/library/17/books"><i class="material-icons">apps</i></a>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title">Fiction</span>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+              
+                  <a href="/library/18/books">
+                    <div class="col m4">
+                      <div class="card">
+                        <div class="card-image">
+                          <img src="/static/images/cat_nonfict.jpg" alt="image of Non-Fiction category">
+                          <a class="btn-floating halfway-fab waves-effect waves-light red" href="/library/18/books"><i class="material-icons">apps</i></a>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title">Non-Fiction</span>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+              
+                  <a href="/library/19/books">
+                    <div class="col m4">
+                      <div class="card">
+                        <div class="card-image">
+                          <img src="/static/images/cat_graphnov.png" alt="image of Graphic Novel category">
+                          <a class="btn-floating halfway-fab waves-effect waves-light red" href="/library/19/books"><i class="material-icons">apps</i></a>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title">Graphic Novel</span>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+              
+                  <a href="/library/20/books">
+                    <div class="col m4">
+                      <div class="card">
+                        <div class="card-image">
+                          <img src="/static/images/cat_poetry.jpg" alt="image of Poetry category">
+                          <a class="btn-floating halfway-fab waves-effect waves-light red" href="/library/20/books"><i class="material-icons">apps</i></a>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title">Poetry</span>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+              
+                  <a href="/library/21/books">
+                    <div class="col m4">
+                      <div class="card">
+                        <div class="card-image">
+                          <img src="/static/images/cat_child.jpg" alt="image of Children&#39;s Books category">
+                          <a class="btn-floating halfway-fab waves-effect waves-light red" href="/library/21/books"><i class="material-icons">apps</i></a>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title">Children&#39;s Books</span>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+              
+                  <a href="/library/22/books">
+                    <div class="col m4">
+                      <div class="card">
+                        <div class="card-image">
+                          <img src="/static/images/cat_fiction.jpg" alt="image of Fiction category">
+                          <a class="btn-floating halfway-fab waves-effect waves-light red" href="/library/22/books"><i class="material-icons">apps</i></a>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title">Fiction</span>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+              
+                  <a href="/library/23/books">
+                    <div class="col m4">
+                      <div class="card">
+                        <div class="card-image">
+                          <img src="/static/images/cat_nonfict.jpg" alt="image of Non-Fiction category">
+                          <a class="btn-floating halfway-fab waves-effect waves-light red" href="/library/23/books"><i class="material-icons">apps</i></a>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title">Non-Fiction</span>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+              
+                  <a href="/library/24/books">
+                    <div class="col m4">
+                      <div class="card">
+                        <div class="card-image">
+                          <img src="/static/images/cat_graphnov.png" alt="image of Graphic Novel category">
+                          <a class="btn-floating halfway-fab waves-effect waves-light red" href="/library/24/books"><i class="material-icons">apps</i></a>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title">Graphic Novel</span>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+              
+                  <a href="/library/25/books">
+                    <div class="col m4">
+                      <div class="card">
+                        <div class="card-image">
+                          <img src="/static/images/cat_poetry.jpg" alt="image of Poetry category">
+                          <a class="btn-floating halfway-fab waves-effect waves-light red" href="/library/25/books"><i class="material-icons">apps</i></a>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title">Poetry</span>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+              
+          </div>
+        </div>
+
+        <div class="row blue lighten-1">
+          <div class="section no-pad-bot">
+            <div class="row">
+              <div class="col s7 m4">
+                <h4>Recently Added Books</h4>
+              </div>
+            </div>
+          </div>
+          
+            <div class="col s7 m4">
+
+              <div class="card horizontal">
+
+                <div class="card-image">
+                  <img src="/static/images/p_poems_gt.jpg" >
+                </div>
+
+                <div class="card-stacked">
+                  <div class="card-content">
+                    <p style="color: grey">
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                          Poetry
+                        
+                      
+                    </p>
+                    <h6>Poems</h6>
+                    <p>Georg Trakl</p>
+                  </div>
+
+                  <div class="card-action">
+                    <div class="row">
+                      <div class="col">
+                        <a class="waves-effect teal btn" href = "/library/25/38"><i class="material-icons left">details</i>Details</a>
+                      </div>
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+            <div class="col s7 m4">
+
+              <div class="card horizontal">
+
+                <div class="card-image">
+                  <img src="/static/images/p_poetry_aa.jpg" >
+                </div>
+
+                <div class="card-stacked">
+                  <div class="card-content">
+                    <p style="color: grey">
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                          Poetry
+                        
+                      
+                    </p>
+                    <h6>Late Poems</h6>
+                    <p>Anna Akhmatova</p>
+                  </div>
+
+                  <div class="card-action">
+                    <div class="row">
+                      <div class="col">
+                        <a class="waves-effect teal btn" href = "/library/25/37"><i class="material-icons left">details</i>Details</a>
+                      </div>
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+            <div class="col s7 m4">
+
+              <div class="card horizontal">
+
+                <div class="card-image">
+                  <img src="/static/images/gn_pj_gd.jpg" >
+                </div>
+
+                <div class="card-stacked">
+                  <div class="card-content">
+                    <p style="color: grey">
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                          Graphic Novel
+                        
+                      
+                        
+                      
+                    </p>
+                    <h6>Pyongyang: A Journey in North Korea</h6>
+                    <p>Guy Delisle</p>
+                  </div>
+
+                  <div class="card-action">
+                    <div class="row">
+                      <div class="col">
+                        <a class="waves-effect teal btn" href = "/library/24/36"><i class="material-icons left">details</i>Details</a>
+                      </div>
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+            <div class="col s7 m4">
+
+              <div class="card horizontal">
+
+                <div class="card-image">
+                  <img src="/static/images/gn_aya_ma.jpg" >
+                </div>
+
+                <div class="card-stacked">
+                  <div class="card-content">
+                    <p style="color: grey">
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                          Graphic Novel
+                        
+                      
+                        
+                      
+                    </p>
+                    <h6>Aya</h6>
+                    <p>Marguerite Abouet</p>
+                  </div>
+
+                  <div class="card-action">
+                    <div class="row">
+                      <div class="col">
+                        <a class="waves-effect teal btn" href = "/library/24/35"><i class="material-icons left">details</i>Details</a>
+                      </div>
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+            <div class="col s7 m4">
+
+              <div class="card horizontal">
+
+                <div class="card-image">
+                  <img src="/static/images/nf_tbop_cfpm.jpg" >
+                </div>
+
+                <div class="card-stacked">
+                  <div class="card-content">
+                    <p style="color: grey">
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                          Non-Fiction
+                        
+                      
+                        
+                      
+                        
+                      
+                    </p>
+                    <h6>The Book of Palms</h6>
+                    <p>Carl Friedrich Philipp von Martius</p>
+                  </div>
+
+                  <div class="card-action">
+                    <div class="row">
+                      <div class="col">
+                        <a class="waves-effect teal btn" href = "/library/23/34"><i class="material-icons left">details</i>Details</a>
+                      </div>
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+            <div class="col s7 m4">
+
+              <div class="card horizontal">
+
+                <div class="card-image">
+                  <img src="/static/images/nf_tsp_ls.jpg" >
+                </div>
+
+                <div class="card-stacked">
+                  <div class="card-content">
+                    <p style="color: grey">
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                          Non-Fiction
+                        
+                      
+                        
+                      
+                        
+                      
+                    </p>
+                    <h6>The Secret Poisoner</h6>
+                    <p>Linda Stratmann</p>
+                  </div>
+
+                  <div class="card-action">
+                    <div class="row">
+                      <div class="col">
+                        <a class="waves-effect teal btn" href = "/library/23/33"><i class="material-icons left">details</i>Details</a>
+                      </div>
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+
+    
+
+    <!--JavaScript at end of body for optimized loading-->
+    <script type="text/javascript" src="/static/materialize/js/materialize.min.js"></script>
+  </body>
+</html>

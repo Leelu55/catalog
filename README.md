@@ -53,6 +53,17 @@ Get an Account [here](https://accounts.google.com/signup/v2/webcreateaccount?ser
 Obtain Google authorization credentials following these [instructions](https://developers.google.com/identity/protocols/OAuth2WebServer#enable-apis)
 Place the client_secrets.json file in the main directory of the project ("/catalog").
 
+- **PostgreSQL**
+```
+sudo apt install postgresql postgresql-contrib
+```
+
+```
+sudo -u postgres createdb catalog
+```
+
+
+
 ## Getting Started
 
 1. Install all [prerequisites](https://github.com/Leelu55/catalog#prerequisites)
