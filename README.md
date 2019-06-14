@@ -185,10 +185,7 @@ engine = create_engine('sqlite:///library.db')
 ```
 NEW CODE:
 ```
-pgpass = os.environ.get('PGPASS')
-engine = create_engine('postgresql://catalog:' +
-         pgpass +
-         '@localhost:5432/catalog')
+engine = create_engine('postgresql://catalog:library2019@localhost:5432/catalog')
 ```
 
 - in catalog.py in the code execution block at the end remove all localhost related code
@@ -239,7 +236,32 @@ application.secret_key = 'RANDOM SECRET KEY'
 WSGIScriptAlias / /var/www/catalog.wsgi
 </VirtualHost *:80>
 ```
-- In /etc/apache2/sites-enabled
+- In ```/etc/apache2/sites-enabled``` edit the ``` catalog.conf``` file to provide correct IP adress, URL, alias, document root and static location
+
+```
+<VirtualHost 18.196.26.71>
+                ServerName www.amberjack.org
+                ServerAlias amberjack.org
+                DocumentRoot /var/www/catalog
+                <Directory /var/www/catalog/>
+                        Order allow,deny
+                        Allow from all
+                </Directory>
+                Alias /static /var/www/catalog/static
+                <Directory /var/www/catalog/static/>
+                        Order allow,deny
+                        Allow from all
+                </Directory>
+                WSGIScriptAlias / /var/www/catalog.wsgi
+                ErrorLog ${APACHE_LOG_DIR}/error.log
+                LogLevel warn
+                CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+```
+
+## TODO
+
+- To make the Google OAuth2 login work, HTTPS should be enabled, this couldn't be achieved yet.
 
 ## Built With
 
