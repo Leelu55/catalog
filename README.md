@@ -7,7 +7,7 @@
 
 - **catalog**is deployed to a [Amazon Lightsail](https://lightsail.aws.amazon.com/) Linux server instance with Ubuntu 18.04 OS, [Apache2](https://httpd.apache.org/) Web Server and [PostgreSQL](https://www.postgresql.org/) relational database
 
-- The web application Collective Library can be accessed at [http://www.amberjack.org](http://www.amberjack.org)
+- The web application Collective Library can be accessed at **[http://www.amberjack.org](http://www.amberjack.org)**
 
 - The server's IP Adress is **18.196.26.71** and the SSH Port is 2200. It is only accessible via key-based SSH authentication. The key to the grader will be provided as stated
 
@@ -179,15 +179,67 @@ PasswordAuthentication no
 - renamed ```views.py``` to ```catalog.py```
 - create database using PostgreSQL instead of SQLite and using database password from environment variable
 
-OLD CODE: ``` engine = create_engine('sqlite:///library.db')```
-NEW CODE: ``` pgpass = os.environ.get('PGPASS')
-              engine = create_engine('postgresql://catalog:' +
-                       pgpass +
-                       '@localhost:5432/catalog')```
+OLD CODE:
+```
+engine = create_engine('sqlite:///library.db')
+```
+NEW CODE:
+```
+pgpass = os.environ.get('PGPASS')
+engine = create_engine('postgresql://catalog:' +
+         pgpass +
+         '@localhost:5432/catalog')
+```
 
+- in catalog.py in the code execution block at the end remove all localhost related code
 
+OLD CODE:
+```
+if __name__ == '__main__':
+    # setting an environment variable to test the app locally without https
+    os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
+    #  set a secret key to use flask sessions
+    app.secret_key = os.urandom(24)
+    app.debug = True
+    # run the app on http://localhost:8000
+    app.run(host='0.0.0.0', port=8000)
+
+```
+NEW CODE:
+
+```
+if __name__ == '__main__':
+    os.environ['DEBUG'] = '1'
+    app.run()
+
+```
 2. Populating the catalog db with initial data
+
+- Run the ```lotsof_books_categories.py``` inside the ```catalog``` directory **once**
+```python lotsof_books_categories.py```
+
 3. creating the catalog.wsgi file and configuring apache VirtualHost container
+- In ```/var/www``` created the ```catalog.wsgi``` file for enabling apache2 to run the catalog application
+```
+import sys
+import logging
+logging.basicConfig(stream=sys.stderr)
+sys.path.insert(0,"/var/www/catalog")
+
+from catalog import app as application
+application.secret_key = 'RANDOM SECRET KEY'
+```
+- In ```/etc/apache2/sites-available``` edit the ```000-default.conf``` file to add the WSGIScript Alias for Apache to find the ```catalog.wsgi``` file
+```
+<VirtualHost *:80>
+...
+.
+.
+.
+WSGIScriptAlias / /var/www/catalog.wsgi
+</VirtualHost *:80>
+```
+- In /etc/apache2/sites-enabled
 
 ## Built With
 
