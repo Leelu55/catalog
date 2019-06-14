@@ -21,9 +21,7 @@ import random
 import string
 import os
 
-
-pgpass = request.environ.get('PGPASS', 'default')
-engine = create_engine('postgresql://catalog:'+pgpass+'@localhost:5432/catalog')
+engine = create_engine('postgresql://catalog:library2019@localhost:5432/catalog')
 
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
