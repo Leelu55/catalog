@@ -62,9 +62,8 @@ class Book(Base):
         }
 
 
-pgpass = os.environ.get('PGPASS', 'default')
-engine = create_engine('postgresql://catalog:' +
-                       pgpass +
-                       '@localhost:5432/catalog')
+engine = create_engine('postgresql://catalog:'
+                       + os.environ.get('PGPASS')
+                       + '@localhost:5432/catalog')
 
 Base.metadata.create_all(engine)
