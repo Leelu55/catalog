@@ -21,8 +21,6 @@ import random
 import string
 import os
 
-import logging
-from logging.handlers import RotatingFileHandler
 
 print(os.environ.get('PGPASS'))
 
@@ -385,17 +383,5 @@ def credentials_to_dict(credentials):
 
 
 if __name__ == '__main__':
-
-    # initialize the log handler
-    logHandler = RotatingFileHandler('info.log', maxBytes=1000, backupCount=1)
-
-    # set the log handler level
-    logHandler.setLevel(logging.INFO)
-
-    # set the app logger level
-    app.logger.setLevel(logging.INFO)
-
-    app.logger.addHandler(logHandler)
-
     os.environ['DEBUG'] = '1'
     app.run()

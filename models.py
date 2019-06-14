@@ -63,9 +63,6 @@ class Book(Base):
 
 
 pgpass = os.environ.get('PGPASS', 'default')
-
-app.logger.error('testing error log')
-
 engine = create_engine('postgresql://catalog:' +
                        pgpass +
                        '@localhost:5432/catalog')
