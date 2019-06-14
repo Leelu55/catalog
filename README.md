@@ -1,4 +1,3 @@
-
 # Udacity Full Stack Web Developer Nanodegree Project: Linux Server Configuration
 
 [Full Stack Web Developer Nanodegree](https://eu.udacity.com/course/full-stack-web-developer-nanodegree--nd004)
@@ -174,7 +173,7 @@ PasswordAuthentication no
 
 ### Running the Application
 
-1. Changes in catalog project files
+1. **Changes in catalog project files**
 
 - renamed ```views.py``` to ```catalog.py```
 - create database using PostgreSQL instead of SQLite and using database password from environment variable
@@ -188,7 +187,7 @@ NEW CODE:
 engine = create_engine('postgresql://catalog:library2019@localhost:5432/catalog')
 ```
 
-- in catalog.py in the code execution block at the end remove all localhost related code
+- In catalog.py in the code execution block at the end remove all localhost related code
 
 OLD CODE:
 ```
@@ -210,12 +209,12 @@ if __name__ == '__main__':
     app.run()
 
 ```
-2. Populating the catalog db with initial data
+2. **Populating the catalog db with initial data**
 
 - Run the ```lotsof_books_categories.py``` inside the ```catalog``` directory **once**
 ```python lotsof_books_categories.py```
 
-3. creating the catalog.wsgi file and configuring apache VirtualHost container
+3. **creating the catalog.wsgi file and configuring apache VirtualHost container**
 - In ```/var/www``` created the ```catalog.wsgi``` file for enabling apache2 to run the catalog application
 ```
 import sys
