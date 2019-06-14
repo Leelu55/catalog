@@ -4,8 +4,9 @@ from sqlalchemy.orm import sessionmaker
 import os
 from models import Category, Base, Book, User
 
+pgpass = os.environ.get('PGPASS', 'default')
 engine = create_engine('postgresql://catalog:' +
-                       os.environ.get('PGPASS', 'default') +
+                       pgpass +
                        '@localhost:5432/catalog')
 
 Base.metadata.bind = engine
