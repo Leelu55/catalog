@@ -23,7 +23,7 @@ import os
 
 
 #pgpass = os.environ.get('PGPASS', 'default')
-engine = create_engine('postgresql://catalog:'+os.environ.get('PGPASS', 'default')+'@localhost:5432/catalog')
+engine = create_engine('postgresql://catalog:library2019@localhost:5432/catalog')
 
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
