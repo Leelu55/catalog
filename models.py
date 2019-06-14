@@ -5,6 +5,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.sql import func
 
 import os
+import flask
+from flask import request
 
 Base = declarative_base()
 
@@ -62,7 +64,7 @@ class Book(Base):
         }
 
 
-pgpass = os.environ.get('PGPASS')
+pgpass = request.environ.get('PGPASS')
 engine = create_engine('postgresql://catalog:'+pgpass+'@localhost:5432/catalog')
 
 Base.metadata.create_all(engine)
