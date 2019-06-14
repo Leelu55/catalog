@@ -9,7 +9,12 @@
 
 -The web application Collective Library can be accessed at [http://www.amberjack.org](http://www.amberjack.org)
 
--The server's IP Adress is **3.121.185.101** and the SSH Port is 2200. It is only accessible via key-based SSH authentication. The key to the grader will be provided as stated
+-The server's IP Adress is **18.196.26.71** and the SSH Port is 2200. It is only accessible via key-based SSH authentication. The key to the grader will be provided as stated
+
+## Server login for grader
+```
+ssh grader@18.196.26.71 -p 2200 -i ~/PATH/TO/SAVED/PRIVATE/KEY
+```
 
 ## Installed software
 
@@ -84,17 +89,94 @@ also activated the module
 sudo a2enmod wsgi
 ```
 
+**Installed finger: user information lookup program**
+```
+sudo apt-get install finger
+```
 ## Config changes
 
-1. **Create new user grader**
-2. **Add grader to sudoers**
-3. **Disable Root Login**
-4. **Enable SSH key authorization**
-5. **Enforce SSH key-based only remote login**
-6. **Add ports to Ubuntu Firewall and enable Firewall**
-7. **Add ports in Lightsail instance**
-8. **add SSH port on non default host**
+1. **Created new user grader**
+```
+sudo adduser grader
+```
+2. **Added grader to sudoers**
+```
+cp sudoers.d/90-cloud-init-users sudoers.d/grader
+```
+- in sudoers.d/grader give grader sudo rights:
+```
+# User rules for grader
+grader ALL=(ALL) NOPASSWD:ALL
+```
 
+3. **Disabled remote Root Login editing the /etc/ssh/sshd_config file**
+
+- Prevented ssh root login editing "PermitRootLogin" by uncommenting it and changing to:
+```
+PermitRootLogin no
+```
+4. **Added SSH port on non default host**
+- Editing in the the ```/etc/ssh/sshd_config``` port by uncommenting and changing to:
+```
+Port 2200
+```
+
+5. **Enabled grader (and ubuntuſ) for SSH key authorization**
+- On the local machine create public/private keypairs for grader
+```
+ssh-keygen -t rsa
+
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/leelu/.ssh/id_rsa): grader
+
+cat grader.pub
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC9xmJEymzqNeBhgdEXRNLa3HB4qXALzMvnfiqLsHumDkuH5JayQWV6RlMC1P1BXUSNOE7Ar292b6Y4YK3zLq3ddz38WC0n8a2HKc8ztU+Rfuwkeru9g4ToiG+Ts5J7eluHgMZZOBhQ+YraVlYGujs26jKsiaXZOBvgFy3jWBjXv0ked4piul3ZN2G2WTmA1LXxDgDxxqGdeEp4qnqV06PJ7vj6VgCFsGiCsK7bJUOl74PxRhGIW1iJo5Jp39yB7+KPQJ4sR2QKvlypifNtnzho0845eahohooNpGznAfNhvGPJjJ87ToOUqj+ADLMR35vR7/33ZQ/fAgC8TWuaG7N1 leelu@leelu-XPS-13-9360
+```
+- Copy the public key string
+- On the server as sudo user (ubuntu) in the .ssh directory created the authorized keys file
+```
+sudo nano authorized_keys
+```
+-copy the ```grader.pub```content into the```authorized_keys file```
+-change permissions on  ```.ssh```directory to 700 (owner can read/write/execute) ```chmod 700 .ssh```
+-change permissions on ```authorized_keys``` file to 644 (owner can read/write, read for group and everyone) ```sudo chmod 700 ~/.ssh/authorized_keys```
+-
+6. **Enforced SSH key-based only remote login**
+- Editing in the the ```/etc/ssh/sshd_config``` PasswordAuthentication by uncommenting and changing to:
+```
+PasswordAuthentication no
+```
+-Then restart ssh``` sudo service ssh restart```
+
+7. **Added ports to Ubuntu Firewall and enable Firewall**
+
+- Check current firewall status
+```sudo ufw status```
+
+- Disable all incoming traffic
+```sudo ufw default deny incoming```
+
+- Enable all outgoing traffic
+```sudo ufw default allow outgoing```
+
+- allow ssh, www and ntp
+``` sudo ufw allow ntp```
+``` sudo ufw allow www```
+``` sudo ufw allow ssh```
+
+- Check current firewall status
+```sudo ufw status```
+
+- Enable firewall
+```sudo ufw enable```
+
+- also added ports in Lightsail instance in web dashboard
+
+###Running the Application
+
+1. Changes in catalog project files
+2. Populating the catalog db with initial data
+3. creating the catalog.wsgi file and configuring apache VirtualHost container
 
 ## Built With
 
@@ -112,5 +194,3 @@ See also the list of [contributors](https://github.com/Leelu55/catalog/contribut
 ## Acknowledgments
 
 * Inspirations : Full Stack Web Developer Nanodegree code
-
-
