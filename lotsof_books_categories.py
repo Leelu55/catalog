@@ -4,7 +4,9 @@ from sqlalchemy.orm import sessionmaker
 import os
 from models import Category, Base, Book, User
 
-engine = create_engine('postgresql://catalog:'+os.environ.get('PGPASS', 'default')+'@localhost:5432/catalog')
+engine = create_engine('postgresql://catalog:' +
+                       os.environ.get('PGPASS', 'default') +
+                       '@localhost:5432/catalog')
 
 Base.metadata.bind = engine
 
@@ -188,4 +190,3 @@ session.commit()
 
 
 print "added initial data!"
-
