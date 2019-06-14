@@ -5,11 +5,11 @@
 
 - The **catalog**(https://github.com/Leelu55/catalog) web app written in Python, HTML, CSS and Javascript provides lists of books within book categories like fiction or poetry.
 
--**catalog**is deployed to a [Amazon Lightsail](https://lightsail.aws.amazon.com/) Linux server instance with Ubuntu 18.04 OS, [Apache2](https://httpd.apache.org/) Web Server and [PostgreSQL](https://www.postgresql.org/) relational database
+- **catalog**is deployed to a [Amazon Lightsail](https://lightsail.aws.amazon.com/) Linux server instance with Ubuntu 18.04 OS, [Apache2](https://httpd.apache.org/) Web Server and [PostgreSQL](https://www.postgresql.org/) relational database
 
--The web application Collective Library can be accessed at [http://www.amberjack.org](http://www.amberjack.org)
+- The web application Collective Library can be accessed at [http://www.amberjack.org](http://www.amberjack.org)
 
--The server's IP Adress is **18.196.26.71** and the SSH Port is 2200. It is only accessible via key-based SSH authentication. The key to the grader will be provided as stated
+- The server's IP Adress is **18.196.26.71** and the SSH Port is 2200. It is only accessible via key-based SSH authentication. The key to the grader will be provided as stated
 
 ## Server login for grader
 ```
@@ -41,7 +41,7 @@ pip install SQLAlchemy
  pip install --upgrade google-api-python-client
 ```
 
-- **install PostgreSQL and create db**
+- **Installed PostgreSQL and create db**
 ```
 sudo apt install postgresql postgresql-contrib
 ```
@@ -49,7 +49,7 @@ sudo apt install postgresql postgresql-contrib
 ```
 sudo -u postgres createdb catalog
 ```
-The user for the postgresql (catalog) db catalog as well as the password (written into /etc/environment) were set  using
+- user for the postgresql (catalog) db catalog as well as the password (written into /etc/environment) were set using
 
 ```
 sudo -i -u postgres
@@ -58,32 +58,32 @@ sudo -i -u postgres
 ```
 postgres=# ALTER USER catalog WITH ENCRYPTED PASSWORD '<PASSWORD>'
 ```
-
-also for use of PostgreSQL and Python installed **psycopg2**
+- also for use of PostgreSQL and Python installed **psycopg2**
 
 ```
 sudo -H pip install psycopg2
 ```
 
--**Install git and commit catalog project**
+- **Installed git and commit catalog project**
 
-for testing and modifying git was installed, a git repo inside the /var/www/catalog directory initialized and used for version controll
+- for testing and modifying git was installed, a git repo inside the /var/www/catalog directory initialized and used for version controll
 ```
 sudo apt-get install git
 ```
-inside /var/www/catalog
+- inside ```/var/www/catalog```
+
 ```
 sudo git init
 ```
 
--**Installed python mod_wsgi package for Python 2**
+- **Installed python ```mod_wsgi``` package for Python 2**
 
-The mod_wsgi module for Apache2 for enabling the execution of python scripts by the web server
+- The mod_wsgi module for Apache2 for enabling the execution of python scripts by the web server
 ```
 sudo apt-get install libapache2-mod-wsgi
 ```
 
-also activated the module
+- also activated the module
 
 ```
 sudo a2enmod wsgi
@@ -137,10 +137,10 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC9xmJEymzqNeBhgdEXRNLa3HB4qXALzMvnfiqLsHum
 ```
 sudo nano authorized_keys
 ```
--copy the ```grader.pub```content into the```authorized_keys file```
--change permissions on  ```.ssh```directory to 700 (owner can read/write/execute) ```chmod 700 .ssh```
--change permissions on ```authorized_keys``` file to 644 (owner can read/write, read for group and everyone) ```sudo chmod 700 ~/.ssh/authorized_keys```
--
+- copy the ```grader.pub```content into the```authorized_keys file```
+- change permissions on  ```.ssh```directory to 700 (owner can read/write/execute) ```chmod 700 .ssh```
+- change permissions on ```authorized_keys``` file to 644 (owner can read/write, read for group and everyone) ```sudo chmod 700 ~/.ssh/authorized_keys```
+
 6. **Enforced SSH key-based only remote login**
 - Editing in the the ```/etc/ssh/sshd_config``` PasswordAuthentication by uncommenting and changing to:
 ```
@@ -172,9 +172,20 @@ PasswordAuthentication no
 
 - also added ports in Lightsail instance in web dashboard
 
-###Running the Application
+### Running the Application
 
 1. Changes in catalog project files
+
+- renamed ```views.py``` to ```catalog.py```
+- create database using PostgreSQL instead of SQLite and using database password from environment variable
+
+OLD CODE: ``` engine = create_engine('sqlite:///library.db')```
+NEW CODE: ``` pgpass = os.environ.get('PGPASS')
+              engine = create_engine('postgresql://catalog:' +
+                       pgpass +
+                       '@localhost:5432/catalog')```
+
+
 2. Populating the catalog db with initial data
 3. creating the catalog.wsgi file and configuring apache VirtualHost container
 
